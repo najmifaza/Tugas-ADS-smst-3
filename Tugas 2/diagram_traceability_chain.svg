@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 280" width="100%" height="100%">
+  <defs>
+    <!-- Arrowhead Marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#028090" />
+    </marker>
+
+    <!-- Subtle Drop Shadow -->
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F2438" flood-opacity="0.08" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1000" height="280" fill="#FFFFFF" />
+
+  <!-- Diagram Title -->
+  <text x="500" y="38" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#1A365D" text-anchor="middle" letter-spacing="0.5">
+    Traceability Chain – Layanan Pemesanan Konten Medkreminfo
+  </text>
+
+  <!-- ==================== NODE 1: EVIDENCE ==================== -->
+  <g transform="translate(30, 65)">
+    <rect width="160" height="85" rx="10" fill="#F4F8FC" stroke="#028090" stroke-width="2" filter="url(#shadow)" />
+    <text x="80" y="28" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="800" fill="#028090" text-anchor="middle">
+      Evidence (W02)
+    </text>
+    <text x="80" y="50" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      Pesanan tenggelam
+    </text>
+    <text x="80" y="66" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      di chat WhatsApp
+    </text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="192" y1="107" x2="224" y2="107" stroke="#028090" stroke-width="2.2" marker-end="url(#arrow)" />
+
+  <!-- ==================== NODE 2: PAIN POINT ==================== -->
+  <g transform="translate(228, 65)">
+    <rect width="160" height="85" rx="10" fill="#F4F8FC" stroke="#E67E22" stroke-width="2" filter="url(#shadow)" />
+    <text x="80" y="28" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="800" fill="#E67E22" text-anchor="middle">
+      Pain Point (PP-01)
+    </text>
+    <text x="80" y="50" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      Status pengerjaan
+    </text>
+    <text x="80" y="66" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      tidak terlihat pemesan
+    </text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="390" y1="107" x2="422" y2="107" stroke="#028090" stroke-width="2.2" marker-end="url(#arrow)" />
+
+  <!-- ==================== NODE 3: FUNCTIONAL REQUIREMENT ==================== -->
+  <g transform="translate(426, 65)">
+    <rect width="160" height="85" rx="10" fill="#F4F8FC" stroke="#1A365D" stroke-width="2.2" filter="url(#shadow)" />
+    <text x="80" y="28" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="800" fill="#1A365D" text-anchor="middle">
+      FR-05
+    </text>
+    <text x="80" y="50" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      Tampilkan status tiket
+    </text>
+    <text x="80" y="66" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      secara real-time
+    </text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="588" y1="107" x2="620" y2="107" stroke="#028090" stroke-width="2.2" marker-end="url(#arrow)" />
+
+  <!-- ==================== NODE 4: ACCEPTANCE CRITERIA ==================== -->
+  <g transform="translate(624, 65)">
+    <rect width="160" height="85" rx="10" fill="#F4F8FC" stroke="#028090" stroke-width="2" filter="url(#shadow)" />
+    <text x="80" y="28" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="800" fill="#028090" text-anchor="middle">
+      AC-06
+    </text>
+    <text x="80" y="50" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      Status tampil = status
+    </text>
+    <text x="80" y="66" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      tahapan di database
+    </text>
+  </g>
+
+  <!-- Arrow 4 -> 5 -->
+  <line x1="786" y1="107" x2="818" y2="107" stroke="#028090" stroke-width="2.2" marker-end="url(#arrow)" />
+
+  <!-- ==================== NODE 5: NEXT MODEL ==================== -->
+  <g transform="translate(822, 65)">
+    <rect width="160" height="85" rx="10" fill="#F4F8FC" stroke="#E67E22" stroke-width="2" filter="url(#shadow)" />
+    <text x="80" y="28" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="800" fill="#E67E22" text-anchor="middle">
+      Next Model
+    </text>
+    <text x="80" y="50" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      UC Lacak Progres /
+    </text>
+    <text x="80" y="66" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#2D3748" text-anchor="middle">
+      State Diagram Tiket
+    </text>
+  </g>
+
+  <!-- Principle Note -->
+  <text x="500" y="195" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#718096" text-anchor="middle" font-style="italic">
+    Prinsip: setiap artefak penting memiliki alasan keberadaan dan hubungan yang dapat ditelusuri.
+  </text>
+
+  <!-- Figure Caption -->
+  <text x="500" y="240" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#4A5568" text-anchor="middle">
+    Gambar 2. Contoh rantai traceability dari evidence sampai model berikutnya.
+  </text>
+</svg>

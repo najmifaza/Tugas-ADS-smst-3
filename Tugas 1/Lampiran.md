@@ -11,9 +11,9 @@
 
 | Keterangan | Detail |
 |---|---|
-| **Tanggal** | ............................ |
-| **Waktu** | ............................ |
-| **Lokasi** | ............................ |
+| **Tanggal** | Senin, 7 September 2026 |
+| **Waktu** | 15.30 – 17.00 WIB |
+| **Lokasi** | Ruang Sekretariat Bersama BEM Fakultas Teknik UNSOED, Kampus Blater |
 | **Narasumber** | Aba Ibrahim |
 | **Jabatan Narasumber** | Staf Kementerian Media, Kreatif, dan Informasi (Medkreminfo) BEM FT UNSOED |
 | **Pewawancara** | Timotius Willy Narendra, Fardizza Vinda Rahman, Adridinan Najmi Faza |

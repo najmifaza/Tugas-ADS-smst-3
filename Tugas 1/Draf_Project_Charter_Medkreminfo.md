@@ -3,12 +3,12 @@
 ## PROJECT CHARTER
 
 Version <1.0>
-<15 September 2024>
+<15 September 2026>
 
 Disusun oleh:
 
 **Project Manager**
-[Nama Anda] ([NIM Anda])
+Timotius Willy Narendra (H1D025052)
 
 **Anggota**
 Timotius Willy Narendra (H1D025052)
@@ -96,8 +96,8 @@ Terdapat beberapa risiko pada proyek ini. Risiko terbesar adalah *user resistanc
 ### SISTEM INFORMASI LAYANAN PEMESANAN KONTEN MEDKREMINFO
 
 **Project Title** : Sistem Informasi Pemesanan Konten Medkreminfo
-**Project Start Date** : 15 September 2024
-**Project Finished Date** : 4 November 2024
+**Project Start Date** : 15 September 2026
+**Project Finished Date** : 4 November 2026
 
 **Budget Information** :
 Proyek ini diestimasikan membutuhkan dana pengembangan dan infrastruktur sebesar Rp 6.750.000,00 (hipotesis). Pengerjaan dilakukan oleh tim pengembang mahasiswa dengan estimasi pengerjaan selama 50 hari kalender kerja.
