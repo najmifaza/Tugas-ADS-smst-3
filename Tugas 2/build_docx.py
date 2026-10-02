@@ -3,14 +3,16 @@ import os
 import docx
 from docx import Document
 from docx.shared import Pt, Cm, Inches, RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT, WD_TAB_LEADER
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml import OxmlElement, parse_xml
 from docx.oxml.ns import nsdecls, qn
 
-def set_cell_margins(cell, top=100, bottom=100, left=150, right=150):
-    tc = cell._tc
-    tcPr = tc.get_or_add_tcPr()
+FONT_NAME = 'Times New Roman'
+TOTAL_W_DXA = 7937  # 14.0 cm (A4 11906 - 2268 left 4cm - 1701 right 3cm)
+
+def set_cell_margins(cell, top=40, bottom=40, left=80, right=80):
+    tcPr = cell._tc.get_or_add_tcPr()
     tcMar = OxmlElement('w:tcMar')
     for m, val in [('top', top), ('bottom', bottom), ('left', left), ('right', right)]:
         node = OxmlElement(f'w:{m}')
@@ -19,205 +21,222 @@ def set_cell_margins(cell, top=100, bottom=100, left=150, right=150):
         tcMar.append(node)
     tcPr.append(tcMar)
 
-def set_cell_shading(cell, color_hex):
-    shading_elm = parse_xml(f'<w:shd {nsdecls("w")} w:fill="{color_hex}"/>')
-    cell._tc.get_or_add_tcPr().append(shading_elm)
-
-def set_table_borders(table, color="D3D3D3", sz="4", val="single"):
+def set_table_borders(table, color="000000", sz="4", val="single"):
     tblPr = table._tbl.tblPr
-    borders = parse_xml(f'''
+    borders = parse_xml(f"""
         <w:tblBorders {nsdecls("w")}>
             <w:top w:val="{val}" w:sz="{sz}" w:space="0" w:color="{color}"/>
             <w:bottom w:val="{val}" w:sz="{sz}" w:space="0" w:color="{color}"/>
-            <w:left w:val="none"/>
-            <w:right w:val="none"/>
+            <w:left w:val="{val}" w:sz="{sz}" w:space="0" w:color="{color}"/>
+            <w:right w:val="{val}" w:sz="{sz}" w:space="0" w:color="{color}"/>
             <w:insideH w:val="{val}" w:sz="{sz}" w:space="0" w:color="{color}"/>
-            <w:insideV w:val="none"/>
+            <w:insideV w:val="{val}" w:sz="{sz}" w:space="0" w:color="{color}"/>
         </w:tblBorders>
-    ''')
+    """)
     tblPr.append(borders)
 
-def make_callout_box(doc, text):
-    table = doc.add_table(rows=1, cols=1)
+def add_page_number_to_section(section):
+    # Enable different first page
+    sectPr = section._sectPr
+    titlePg = OxmlElement('w:titlePg')
+    sectPr.append(titlePg)
+
+    # Footer for subsequent pages
+    footer = section.footer
+    p = footer.paragraphs[0]
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after = Pt(0)
+    
+    # Add page number run
+    fldSimple = OxmlElement('w:fldSimple')
+    fldSimple.set(qn('w:instr'), 'PAGE')
+    p._p.append(fldSimple)
+
+def plain(s):
+    return re.sub(r'[*_`]', '', s)
+
+def col_widths(rows):
+    n = len(rows[0])
+    def cw(ch):
+        if re.match(r'[A-Z0-9#]', ch):
+            return 140
+        elif re.match(r'[ilftjr.,:;()/\-]', ch):
+            return 62
+        else:
+            return 98
+
+    mins = []
+    weights = []
+    for c in range(n):
+        longest = 0
+        tot = 0
+        for ri, r in enumerate(rows):
+            cell_str = plain(r[c] if c < len(r) else '')
+            tot += len(cell_str)
+            f = 1.12 if (ri == 0 or (c < len(r) and r[c].startswith('**'))) else 1.0
+            for w in cell_str.split():
+                w_len = f * sum(cw(ch) for ch in w)
+                if w_len > longest:
+                    longest = w_len
+        mins.append(min(longest * 1.0 + 170, 2500))
+        weights.append(max(8, min(tot / max(len(rows), 1), 120)))
+
+    sum_min = sum(mins)
+    if sum_min >= TOTAL_W_DXA:
+        w = [int(m * TOTAL_W_DXA / sum_min) for m in mins]
+    else:
+        extra = TOTAL_W_DXA - sum_min
+        sw = sum(weights)
+        w = [int(m + extra * weights[i] / sw) for i, m in enumerate(mins)]
+    
+    # Adjust rounding remainder
+    rem = TOTAL_W_DXA - sum(w)
+    w[-1] += rem
+    return w
+
+def runs(paragraph, text, base_font_size=12, default_bold=False, default_italic=False, default_color=None):
+    re_tokens = re.compile(r'(\*\*\*([^*]+)\*\*\*|\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`)')
+    last = 0
+    for m in re_tokens.finditer(text):
+        if m.start() > last:
+            r = paragraph.add_run(text[last:m.start()])
+            r.font.name = FONT_NAME
+            r.font.size = Pt(base_font_size)
+            if default_bold: r.font.bold = True
+            if default_italic: r.font.italic = True
+            if default_color: r.font.color.rgb = default_color
+
+        if m.group(2) is not None:
+            r = paragraph.add_run(m.group(2))
+            r.font.name = FONT_NAME
+            r.font.size = Pt(base_font_size)
+            r.font.bold = True
+            r.font.italic = True
+        elif m.group(3) is not None:
+            r = paragraph.add_run(m.group(3))
+            r.font.name = FONT_NAME
+            r.font.size = Pt(base_font_size)
+            r.font.bold = True
+        elif m.group(4) is not None:
+            r = paragraph.add_run(m.group(4))
+            r.font.name = FONT_NAME
+            r.font.size = Pt(base_font_size)
+            r.font.italic = True
+        elif m.group(5) is not None:
+            r = paragraph.add_run(m.group(5))
+            r.font.name = 'Consolas'
+            r.font.size = Pt(base_font_size - 1)
+        last = m.end()
+
+    if last < len(text):
+        r = paragraph.add_run(text[last:])
+        r.font.name = FONT_NAME
+        r.font.size = Pt(base_font_size)
+        if default_bold: r.font.bold = True
+        if default_italic: r.font.italic = True
+        if default_color: r.font.color.rgb = default_color
+
+def body_p(doc, text, align=WD_ALIGN_PARAGRAPH.JUSTIFY, space_after=0, space_before=0, line_spacing=1.5, bold=False):
+    p = doc.add_paragraph()
+    p.alignment = align
+    p.paragraph_format.line_spacing = line_spacing
+    p.paragraph_format.space_before = Pt(space_before)
+    p.paragraph_format.space_after = Pt(space_after)
+    runs(p, text, base_font_size=12, default_bold=bold)
+    return p
+
+def spacer_p(doc, pt=6):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after = Pt(pt)
+    p.paragraph_format.line_spacing = 1.0
+
+def make_table(doc, rows):
+    widths_dxa = col_widths(rows)
+    table = doc.add_table(rows=len(rows), cols=len(widths_dxa))
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
     table.autofit = False
-    cell = table.rows[0].cells[0]
-    cell.width = Cm(14.0)
-    set_cell_shading(cell, "F4F8FC")
-    set_cell_margins(cell, top=140, bottom=140, left=200, right=140)
-    
-    # Left thick border
-    tcPr = cell._tc.get_or_add_tcPr()
-    borders = parse_xml(f'''
-        <w:tcBorders {nsdecls("w")}>
-            <w:left w:val="single" w:sz="24" w:space="0" w:color="1A365D"/>
-            <w:top w:val="none"/>
-            <w:right w:val="none"/>
-            <w:bottom w:val="none"/>
-        </w:tcBorders>
-    ''')
-    tcPr.append(borders)
-    
-    p = cell.paragraphs[0]
-    p.paragraph_format.line_spacing = 1.15
-    p.paragraph_format.space_after = Pt(2)
-    p.paragraph_format.space_before = Pt(2)
-    run = p.add_run(text)
-    run.font.name = 'Times New Roman'
-    run.font.size = Pt(11)
-    run.font.italic = True
-    run.font.color.rgb = RGBColor(0x1A, 0x36, 0x5D)
+    set_table_borders(table, color="000000", sz="4", val="single")
 
-def create_element(name):
-    return OxmlElement(name)
+    for ri, row in enumerate(rows):
+        trow = table.rows[ri]
+        trPr = trow._tr.get_or_add_trPr()
+        trPr.append(parse_xml(f'<w:cantSplit {nsdecls("w")}/>'))
+
+        if ri == 0:
+            trPr.append(parse_xml(f'<w:tblHeader {nsdecls("w")}/>'))
+
+        for ci, cell_text in enumerate(row):
+            cell = trow.cells[ci]
+            cell.width = Inches(widths_dxa[ci] / 1440.0)
+            set_cell_margins(cell, top=40, bottom=40, left=80, right=80)
+            cell.vertical_alignment = WD_ALIGN_VERTICAL.TOP
+
+            p = cell.paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER if ri == 0 else WD_ALIGN_PARAGRAPH.LEFT
+            p.paragraph_format.line_spacing = 1.0
+            p.paragraph_format.space_before = Pt(0)
+            p.paragraph_format.space_after = Pt(0)
+
+            clean_text = cell_text.replace('<br>', '\n').replace('&amp;', '&')
+            sub_lines = clean_text.split('\n')
+            for sli, sl in enumerate(sub_lines):
+                if sli > 0:
+                    p = cell.add_paragraph()
+                    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                    p.paragraph_format.line_spacing = 1.0
+                    p.paragraph_format.space_before = Pt(0)
+                    p.paragraph_format.space_after = Pt(0)
+                runs(p, sl, base_font_size=10.5 if ri > 0 else 10.5, default_bold=(ri == 0))
+    return table
 
 def build_srs_docx(md_path, docx_path):
     with open(md_path, 'r', encoding='utf-8') as f:
-        md_content = f.read()
+        raw_text = f.read()
+
+    raw_lines = raw_text.split('\n')
+
+    # Place Referensi Acuan Pembelajaran before Lampiran A so body order matches Daftar Isi
+    ref_idx = -1
+    lamp_idx = -1
+    for idx, l in enumerate(raw_lines):
+        if l.startswith('## Referensi Acuan') and ref_idx == -1:
+            ref_idx = idx
+        elif l.startswith('## Lampiran A') and lamp_idx == -1:
+            lamp_idx = idx
+
+    if ref_idx > lamp_idx and lamp_idx > 0:
+        ref_block = raw_lines[ref_idx:]
+        raw_lines = raw_lines[:lamp_idx] + ref_block + ['', '---', ''] + raw_lines[lamp_idx:ref_idx]
 
     doc = Document()
 
     # Page Setup (A4, Left 4cm, Right 3cm, Top 4cm, Bottom 3cm)
-    for section in doc.sections:
-        section.page_width = Cm(21.0)
-        section.page_height = Cm(29.7)
-        section.top_margin = Cm(4.0)
-        section.bottom_margin = Cm(3.0)
-        section.left_margin = Cm(4.0)
-        section.right_margin = Cm(3.0)
+    sec = doc.sections[0]
+    sec.page_width = Inches(21.0 / 2.54)
+    sec.page_height = Inches(29.7 / 2.54)
+    sec.top_margin = Inches(4.0 / 2.54)
+    sec.bottom_margin = Inches(3.0 / 2.54)
+    sec.left_margin = Inches(4.0 / 2.54)
+    sec.right_margin = Inches(3.0 / 2.54)
+    add_page_number_to_section(sec)
 
-    # Base Normal Style
-    style_normal = doc.styles['Normal']
-    style_normal.font.name = 'Times New Roman'
-    style_normal.font.size = Pt(12)
-    style_normal.font.color.rgb = RGBColor(0x22, 0x22, 0x22)
-    style_normal.paragraph_format.line_spacing = 1.5
-    style_normal.paragraph_format.space_after = Pt(6)
-    style_normal.paragraph_format.space_before = Pt(0)
+    # Styles
+    normal = doc.styles['Normal']
+    normal.font.name = FONT_NAME
+    normal.font.size = Pt(12)
+    normal.font.color.rgb = RGBColor(0x00, 0x00, 0x00)
+    normal.paragraph_format.line_spacing = 1.5
 
-    lines = md_content.split('\n')
-    i = 0
-    total_lines = len(lines)
-
+    toc_entries = []
+    cover = True
     in_table = False
     table_rows = []
+    i = 0
 
-    def flush_table(rows):
-        if not rows:
-            return
-        
-        # Clean rows
-        cleaned_rows = []
-        for r in rows:
-            # check if separator row
-            if re.match(r'^\s*\|?\s*[-:\s|]+\s*\|?\s*$', r):
-                continue
-            cells = [c.strip() for c in r.strip().strip('|').split('|')]
-            cleaned_rows.append(cells)
-        
-        if not cleaned_rows:
-            return
-
-        col_count = max(len(r) for r in cleaned_rows)
-        # Pad shorter rows
-        for r in cleaned_rows:
-            while len(r) < col_count:
-                r.append('')
-
-        tbl = doc.add_table(rows=len(cleaned_rows), cols=col_count)
-        tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
-        tbl.autofit = False
-        set_table_borders(tbl, color="CCCCCC", sz="4", val="single")
-
-        # Column widths calculation (total width 14cm)
-        total_w = 14.0
-        # Determine column weights roughly based on headers
-        headers = cleaned_rows[0]
-        col_widths = []
-        if col_count == 2:
-            col_widths = [4.5, 9.5]
-        elif col_count == 3:
-            col_widths = [3.5, 5.0, 5.5]
-        elif col_count == 4:
-            if 'ID' in headers[0] or 'Req' in headers[0]:
-                col_widths = [2.2, 5.8, 3.5, 2.5]
-            else:
-                col_widths = [3.0, 4.0, 4.0, 3.0]
-        elif col_count == 6:
-            col_widths = [1.8, 2.7, 3.0, 2.5, 2.5, 1.5]
-        elif col_count == 7:
-            col_widths = [1.5, 2.2, 2.5, 2.5, 1.8, 2.0, 1.5]
-        else:
-            w_each = total_w / col_count
-            col_widths = [w_each] * col_count
-
-        for row_idx, row_data in enumerate(cleaned_rows):
-            row = tbl.rows[row_idx]
-            # row cantSplit
-            trPr = row._tr.get_or_add_trPr()
-            trPr.append(parse_xml(f'<w:cantSplit {nsdecls("w")}/>'))
-
-            if row_idx == 0:
-                trPr.append(parse_xml(f'<w:tblHeader {nsdecls("w")}/>'))
-
-            for col_idx, cell_value in enumerate(row_data):
-                cell = row.cells[col_idx]
-                cell.width = Cm(col_widths[col_idx] if col_idx < len(col_widths) else total_w/col_count)
-                set_cell_margins(cell, top=80, bottom=80, left=120, right=120)
-                cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
-
-                if row_idx == 0:
-                    set_cell_shading(cell, "F0F4F8")
-
-                p = cell.paragraphs[0]
-                p.paragraph_format.line_spacing = 1.15
-                p.paragraph_format.space_after = Pt(2)
-                p.paragraph_format.space_before = Pt(2)
-
-                # Process formatting inside cell
-                # check bold header
-                cell_text = cell_value.replace('<br>', '\n').replace('&amp;', '&')
-                
-                # Split by newline if present
-                sub_lines = cell_text.split('\n')
-                for sl_idx, sl in enumerate(sub_lines):
-                    if sl_idx > 0:
-                        p = cell.add_paragraph()
-                        p.paragraph_format.line_spacing = 1.15
-                        p.paragraph_format.space_after = Pt(2)
-                        p.paragraph_format.space_before = Pt(0)
-                    
-                    # Parse bold / italic inline
-                    # Simple markdown bold inline parser
-                    tokens = re.split(r'(\*\*.*?\*\*|\*.*?\*)', sl)
-                    for tok in tokens:
-                        if tok.startswith('**') and tok.endswith('**'):
-                            r = p.add_run(tok[2:-2])
-                            r.font.name = 'Times New Roman'
-                            r.font.size = Pt(10.5 if row_idx > 0 else 10.5)
-                            r.font.bold = True
-                            if row_idx == 0:
-                                r.font.color.rgb = RGBColor(0x1A, 0x36, 0x5D)
-                        elif tok.startswith('*') and tok.endswith('*'):
-                            r = p.add_run(tok[1:-1])
-                            r.font.name = 'Times New Roman'
-                            r.font.size = Pt(10.5)
-                            r.font.italic = True
-                        else:
-                            r = p.add_run(tok)
-                            r.font.name = 'Times New Roman'
-                            r.font.size = Pt(10.5)
-                            if row_idx == 0:
-                                r.font.bold = True
-                                r.font.color.rgb = RGBColor(0x1A, 0x36, 0x5D)
-
-        # space after table
-        p_after = doc.add_paragraph()
-        p_after.paragraph_format.space_before = Pt(0)
-        p_after.paragraph_format.space_after = Pt(6)
-
-    while i < total_lines:
-        line = lines[i]
+    while i < len(raw_lines):
+        line = raw_lines[i]
         stripped = line.strip()
 
         # Check table
@@ -228,7 +247,17 @@ def build_srs_docx(md_path, docx_path):
             continue
         else:
             if in_table:
-                flush_table(table_rows)
+                # Filter separator rows
+                cleaned = []
+                for r in table_rows:
+                    if re.match(r'^\s*\|?\s*[-:\s|]+\s*\|?\s*$', r):
+                        continue
+                    cells = [c.strip() for c in r.strip().strip('|').split('|')]
+                    cleaned.append(cells)
+                if cleaned:
+                    spacer_p(doc, 4)
+                    make_table(doc, cleaned)
+                    spacer_p(doc, 4)
                 in_table = False
                 table_rows = []
 
@@ -236,10 +265,79 @@ def build_srs_docx(md_path, docx_path):
             i += 1
             continue
 
-        # Horizontal rule
-        if stripped in ['---', '***', '___']:
+        if re.match(r'^---+\s*$', stripped):
             i += 1
             continue
+
+        # Headings
+        h_match = re.match(r'^(#{1,4})\s+(.*)$', stripped)
+        if h_match:
+            lvl = len(h_match.group(1))
+            text = h_match.group(2).strip()
+
+            if text == 'Daftar Isi':
+                cover = False
+                doc.add_page_break()
+                p = doc.add_paragraph()
+                p.paragraph_format.space_before = Pt(6)
+                p.paragraph_format.space_after = Pt(6)
+                p.paragraph_format.keep_with_next = True
+                runs(p, text, base_font_size=12, default_bold=True)
+                i += 1
+
+                # Parse TOC lines
+                while i < len(raw_lines) and not re.match(r'^---+\s*$', raw_lines[i].strip()):
+                    toc_m = re.match(r'^(\s*)([*-]|\d+\.)\s+(.*)$', raw_lines[i])
+                    if toc_m:
+                        num = re.search(r'\d+\.', toc_m.group(2))
+                        is_sub = (not num and len(toc_m.group(1)) >= 2)
+                        t_title = f"{toc_m.group(2)} {toc_m.group(3)}" if num else toc_m.group(3)
+                        toc_entries.append((t_title, 1 if is_sub else 0))
+                    i += 1
+
+                # Render TOC with tab stops & dot leaders
+                for title, indent_level in toc_entries:
+                    tp = doc.add_paragraph()
+                    tp.paragraph_format.line_spacing = 1.5
+                    tp.paragraph_format.space_before = Pt(0)
+                    tp.paragraph_format.space_after = Pt(0)
+                    tp.paragraph_format.left_indent = Inches(0.5) if indent_level == 1 else Inches(0)
+                    
+                    # Add right-aligned tab stop with dot leader at TOTAL_W_DXA
+                    tp.paragraph_format.tab_stops.add_tab_stop(Inches(TOTAL_W_DXA / 1440.0), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
+                    
+                    runs(tp, title, base_font_size=12)
+                    r_tab = tp.add_run('\t')
+                    r_tab.font.name = FONT_NAME
+                    r_tab.font.size = Pt(12)
+                continue
+
+            if cover:
+                # Cover page elements
+                p = doc.add_paragraph()
+                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                p.paragraph_format.line_spacing = 1.5
+                p.paragraph_format.space_before = Pt(12 if (lvl == 3 and text.startswith('Tim')) else 2)
+                p.paragraph_format.space_after = Pt(2)
+                p.paragraph_format.keep_with_next = True
+                runs(p, text, base_font_size=14 if lvl == 1 else 12, default_bold=True)
+                i += 1
+                continue
+            else:
+                # Regular chapters and sections
+                pb = bool(re.match(r'^(1\. Pendahuluan|Referensi Acuan|Lampiran )', text))
+                if pb:
+                    doc.add_page_break()
+                
+                p = doc.add_paragraph()
+                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                p.paragraph_format.line_spacing = 1.5
+                p.paragraph_format.space_before = Pt(6)
+                p.paragraph_format.space_after = Pt(2)
+                p.paragraph_format.keep_with_next = True
+                runs(p, text, base_font_size=12, default_bold=True)
+                i += 1
+                continue
 
         # Images
         img_match = re.match(r'!\[(.*?)\]\((.*?)\)', stripped)
@@ -249,192 +347,104 @@ def build_srs_docx(md_path, docx_path):
             if os.path.exists(img_path):
                 p_img = doc.add_paragraph()
                 p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                p_img.paragraph_format.space_before = Pt(8)
-                p_img.paragraph_format.space_after = Pt(4)
+                p_img.paragraph_format.space_before = Pt(6)
+                p_img.paragraph_format.space_after = Pt(2)
                 p_img.paragraph_format.keep_with_next = True
-                run_img = p_img.add_run()
-                run_img.add_picture(img_path, width=Cm(14.0))
+                r_img = p_img.add_run()
+                r_img.add_picture(img_path, width=Inches(TOTAL_W_DXA / 1440.0))
             i += 1
             continue
 
-        # Headings
-        if stripped.startswith('# '):
+        # Checklists: - [ ] or - [x]
+        chk_match = re.match(r'^(\s*)-\s+\[([ xX])\]\s+(.*)$', stripped)
+        if chk_match:
+            box = '[√]' if chk_match.group(2) in ['x', 'X'] else '[  ]'
             p = doc.add_paragraph()
-            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p.paragraph_format.space_before = Pt(18)
-            p.paragraph_format.space_after = Pt(4)
-            p.paragraph_format.keep_with_next = True
-            r = p.add_run(stripped[2:])
-            r.font.name = 'Times New Roman'
-            r.font.size = Pt(15)
-            r.font.bold = True
-            r.font.color.rgb = RGBColor(0x1A, 0x36, 0x5D)
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.paragraph_format.line_spacing = 1.5
+            p.paragraph_format.space_before = Pt(0)
+            p.paragraph_format.space_after = Pt(0)
+            p.paragraph_format.left_indent = Inches(0.4)
+            p.paragraph_format.first_line_indent = Inches(-0.4)
+
+            r_box = p.add_run(f"{box}  ")
+            r_box.font.name = FONT_NAME
+            r_box.font.size = Pt(12)
+            runs(p, chk_match.group(3), base_font_size=12)
             i += 1
             continue
 
-        if stripped.startswith('## '):
-            text = stripped[3:]
+        # Lists: * or - or 1.
+        li_match = re.match(r'^(\s*)([*-]|\d+\.)\s+(.*)$', stripped)
+        if li_match:
+            indent_spaces = len(li_match.group(1))
+            bullet = li_match.group(2)
+            content = li_match.group(3)
+
             p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(16)
-            p.paragraph_format.space_after = Pt(6)
-            p.paragraph_format.keep_with_next = True
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.paragraph_format.line_spacing = 1.5
+            p.paragraph_format.space_before = Pt(0)
+            p.paragraph_format.space_after = Pt(0)
             
-            # Subtitle under title vs regular section
-            if i < 15:
-                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                r = p.add_run(text)
-                r.font.name = 'Times New Roman'
-                r.font.size = Pt(13)
-                r.font.bold = True
-                r.font.color.rgb = RGBColor(0x1A, 0x36, 0x5D)
-            else:
-                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-                r = p.add_run(text)
-                r.font.name = 'Times New Roman'
-                r.font.size = Pt(13)
-                r.font.bold = True
-                r.font.color.rgb = RGBColor(0x0F, 0x24, 0x38)
+            base_ind = 0.3 * (1 + (indent_spaces // 2))
+            p.paragraph_format.left_indent = Inches(base_ind)
+            p.paragraph_format.first_line_indent = Inches(-0.25)
+
+            marker = f"{bullet} " if re.match(r'\d+\.', bullet) else "•  "
+            r_mark = p.add_run(marker)
+            r_mark.font.name = FONT_NAME
+            r_mark.font.size = Pt(12)
+            if re.match(r'\d+\.', bullet):
+                r_mark.font.bold = True
+
+            runs(p, content, base_font_size=12)
             i += 1
             continue
 
-        if stripped.startswith('### '):
-            p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(12)
-            p.paragraph_format.space_after = Pt(4)
-            p.paragraph_format.keep_with_next = True
-            if i < 15:
-                p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            else:
-                p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-            r = p.add_run(stripped[4:])
-            r.font.name = 'Times New Roman'
-            r.font.size = Pt(12)
-            r.font.bold = True
-            r.font.color.rgb = RGBColor(0x2B, 0x4C, 0x7E)
-            i += 1
-            continue
-
-        if stripped.startswith('#### '):
-            p = doc.add_paragraph()
-            p.paragraph_format.space_before = Pt(10)
-            p.paragraph_format.space_after = Pt(4)
-            p.paragraph_format.keep_with_next = True
-            r = p.add_run(stripped[5:])
-            r.font.name = 'Times New Roman'
-            r.font.size = Pt(12)
-            r.font.bold = True
-            r.font.italic = True
-            r.font.color.rgb = RGBColor(0x33, 0x33, 0x33)
-            i += 1
-            continue
-
-        # Bullet lists
-        if stripped.startswith('* ') or stripped.startswith('- '):
-            p = doc.add_paragraph(style='List Bullet')
-            p.paragraph_format.line_spacing = 1.3
-            p.paragraph_format.space_before = Pt(1)
-            p.paragraph_format.space_after = Pt(3)
-            content = stripped[2:]
-            
-            # format inline
-            tokens = re.split(r'(\*\*.*?\*\*|\*.*?\*)', content)
-            for tok in tokens:
-                if tok.startswith('**') and tok.endswith('**'):
-                    r = p.add_run(tok[2:-2])
-                    r.font.name = 'Times New Roman'
-                    r.font.size = Pt(12)
-                    r.font.bold = True
-                elif tok.startswith('*') and tok.endswith('*'):
-                    r = p.add_run(tok[1:-1])
-                    r.font.name = 'Times New Roman'
-                    r.font.size = Pt(12)
-                    r.font.italic = True
-                else:
-                    r = p.add_run(tok)
-                    r.font.name = 'Times New Roman'
-                    r.font.size = Pt(12)
-            i += 1
-            continue
-
-        # Numbered lists (e.g. 1. 2. 3.)
-        num_match = re.match(r'^(\d+)\.\s+(.*)$', stripped)
-        if num_match:
-            num, content = num_match.groups()
-            p = doc.add_paragraph()
-            p.paragraph_format.left_indent = Cm(0.6)
-            p.paragraph_format.first_line_indent = Cm(-0.6)
-            p.paragraph_format.line_spacing = 1.3
-            p.paragraph_format.space_before = Pt(1)
-            p.paragraph_format.space_after = Pt(3)
-
-            r_num = p.add_run(f"{num}. ")
-            r_num.font.name = 'Times New Roman'
-            r_num.font.size = Pt(12)
-            r_num.font.bold = True
-
-            tokens = re.split(r'(\*\*.*?\*\*|\*.*?\*)', content)
-            for tok in tokens:
-                if tok.startswith('**') and tok.endswith('**'):
-                    r = p.add_run(tok[2:-2])
-                    r.font.name = 'Times New Roman'
-                    r.font.size = Pt(12)
-                    r.font.bold = True
-                elif tok.startswith('*') and tok.endswith('*'):
-                    r = p.add_run(tok[1:-1])
-                    r.font.name = 'Times New Roman'
-                    r.font.size = Pt(12)
-                    r.font.italic = True
-                else:
-                    r = p.add_run(tok)
-                    r.font.name = 'Times New Roman'
-                    r.font.size = Pt(12)
-            i += 1
-            continue
-
-        # Image captions or italic principle notes
+        # Captions
         if stripped.startswith('*Gambar') or stripped.startswith('*Prinsip:'):
             p = doc.add_paragraph()
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p.paragraph_format.line_spacing = 1.15
-            p.paragraph_format.space_before = Pt(2)
-            p.paragraph_format.space_after = Pt(8)
-            clean_text = stripped.strip('*')
-            r = p.add_run(clean_text)
-            r.font.name = 'Times New Roman'
-            r.font.size = Pt(10.5)
-            r.font.italic = True
-            r.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+            p.paragraph_format.line_spacing = 1.5
+            p.paragraph_format.space_before = Pt(0)
+            p.paragraph_format.space_after = Pt(4)
+            runs(p, stripped, base_font_size=11, default_italic=True)
             i += 1
             continue
 
-        # Regular Paragraph
+        # Blockquote / Callout
+        if stripped.startswith('> '):
+            p = doc.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+            p.paragraph_format.line_spacing = 1.5
+            p.paragraph_format.space_before = Pt(2)
+            p.paragraph_format.space_after = Pt(2)
+            p.paragraph_format.left_indent = Inches(0.4)
+            runs(p, stripped[2:].strip(), base_font_size=11.5, default_italic=True)
+            i += 1
+            continue
+
+        # Regular Body Paragraph
         p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
         p.paragraph_format.line_spacing = 1.5
         p.paragraph_format.space_before = Pt(0)
-        p.paragraph_format.space_after = Pt(6)
-        p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
-
-        tokens = re.split(r'(\*\*.*?\*\*|\*.*?\*)', stripped)
-        for tok in tokens:
-            if tok.startswith('**') and tok.endswith('**'):
-                r = p.add_run(tok[2:-2])
-                r.font.name = 'Times New Roman'
-                r.font.size = Pt(12)
-                r.font.bold = True
-            elif tok.startswith('*') and tok.endswith('*'):
-                r = p.add_run(tok[1:-1])
-                r.font.name = 'Times New Roman'
-                r.font.size = Pt(12)
-                r.font.italic = True
-            else:
-                r = p.add_run(tok)
-                r.font.name = 'Times New Roman'
-                r.font.size = Pt(12)
-
+        p.paragraph_format.space_after = Pt(0)
+        runs(p, stripped, base_font_size=12)
         i += 1
 
-    if in_table:
-        flush_table(table_rows)
+    if in_table and table_rows:
+        cleaned = []
+        for r in table_rows:
+            if re.match(r'^\s*\|?\s*[-:\s|]+\s*\|?\s*$', r):
+                continue
+            cells = [c.strip() for c in r.strip().strip('|').split('|')]
+            cleaned.append(cells)
+        if cleaned:
+            spacer_p(doc, 4)
+            make_table(doc, cleaned)
+            spacer_p(doc, 4)
 
     doc.save(docx_path)
     print(f"Successfully generated DOCX: {docx_path} ({os.path.getsize(docx_path)} bytes)")
