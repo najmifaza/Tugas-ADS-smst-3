@@ -165,14 +165,30 @@ while (i < lines.length) {
     continue;
   }
 
+  if (/^<\/?(details|summary)/.test(line.trim())) {
+    i++;
+    continue;
+  }
+
+  if (line.trim().startsWith('```')) {
+    i++;
+    while (i < lines.length && !lines[i].trim().startsWith('```')) {
+      i++;
+    }
+    i++;
+    continue;
+  }
+
   const img = line.match(/^!\[(.*)\]\((.*)\)\s*$/);
   if (img) {
-    const dims = { 'diagram_system_context.png': [529, 280], 'diagram_traceability_chain.png': [529, 156] }[img[2]];
+    const pngName = img[2].replace(/\.svg$/, '.png');
+    const targetImg = fs.existsSync(SRC + img[2]) && img[2].endsWith('.png') ? img[2] : pngName;
+    const dims = { 'diagram_system_context.png': [529, 280], 'diagram_traceability_chain.png': [529, 156] }[targetImg] || [529, 280];
     children.push(new Paragraph({
       alignment: AlignmentType.CENTER, keepNext: true, spacing: { line: 240, lineRule: LineRuleType.AUTO, before: 120, after: 60 },
-      children: [new ImageRun({ type: 'png', data: fs.readFileSync(SRC + img[2]),
+      children: [new ImageRun({ type: 'png', data: fs.readFileSync(SRC + targetImg),
         transformation: { width: dims[0], height: dims[1] },
-        altText: { title: img[1], description: img[1], name: img[2] } })],
+        altText: { title: img[1], description: img[1], name: targetImg } })],
     }));
     Object.keys(runsByLvl).forEach(k => delete runsByLvl[k]);
     i++; continue;

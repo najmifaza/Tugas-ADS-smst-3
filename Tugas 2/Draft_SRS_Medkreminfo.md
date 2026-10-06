@@ -119,10 +119,81 @@ Pada alur kerja *as-is* saat ini, 14 kementerian di lingkungan BEM FT mengajukan
 ### 2.2 System Context
 Sistem Informasi Layanan Pemesanan Konten beroperasi sebagai sistem aplikasi berbasis web terpusat. Klien dari 14 kementerian menginput data *request* dan aset lampiran. Sistem memproses validasi kepatuhan SLA (BR-01) dan menyimpannya dalam basis data. Admin mengakses antarmuka manajerial untuk validasi dan penugasan ke Eksekutor. Eksekutor mengunggah draf hasil pekerjaan yang kemudian dapat diakses kembali oleh Klien untuk peninjauan.
 
-![Gambar 1. Diagram Konteks Konseptual Sistem Informasi Layanan Pemesanan Konten Medkreminfo](diagram_system_context.png)
+![Gambar 1. Diagram Konteks Konseptual Sistem Informasi Layanan Pemesanan Konten Medkreminfo](diagram_system_context.svg)
 
-*Gambar 1. Diagram konteks konseptual Sistem Informasi Layanan Pemesanan Konten Medkreminfo.*  
-Diagram ini bersifat konseptual. Detail BPMN, use case diagram, activity diagram, dan sequence diagram merupakan artefak lanjutan yang melengkapi paket analisis pada pertemuan selanjutnya.
+*Gambar 1. Diagram konteks konseptual Sistem Informasi Layanan Pemesanan Konten Medkreminfo (Monokrom/Hitam Putih).*  
+Diagram ini disajikan dalam format monokrom (hitam-putih) standar dokumen teknis/SRS. Berkas sumber diagram berbasis XML dapat diakses melalui berkas Draw.io XML [diagram_system_context.drawio](diagram_system_context.drawio) / [diagram_system_context.xml](diagram_system_context.xml) serta berkas vektor [diagram_system_context.svg](diagram_system_context.svg). Detail BPMN, use case diagram, activity diagram, dan sequence diagram merupakan artefak lanjutan yang melengkapi paket analisis pada pertemuan selanjutnya.
+
+<details>
+<summary><b>Kode XML Draw.io - Gambar 1 (Klik untuk melihat/menyalin)</b></summary>
+
+```xml
+<mxfile host="app.diagrams.net" agent="Antigravity" version="24.0.0">
+  <diagram name="Diagram Konteks - Medkreminfo" id="diagram_context_medkreminfo">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1050" pageHeight="560" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="system_container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fbfbfb;strokeColor=#000000;strokeWidth=2;verticalAlign=top;spacingTop=20;fontSize=15;fontStyle=1;fontColor=#000000;" value="SISTEM INFORMASI LAYANAN&#xa;PEMESANAN KONTEN MEDKREMINFO" vertex="1">
+          <mxGeometry x="290" y="50" width="420" height="410" as="geometry" />
+        </mxCell>
+        <mxCell id="func_pemesanan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Pemesanan Konten&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(Multi-Kanal &amp;amp; Brief)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="315" y="145" width="175" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="func_validasi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Validasi &amp;amp; Disposisi&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(Penugasan Eksekutor)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="510" y="145" width="175" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="func_pelacakan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Pelacakan Status&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(Review &amp;amp; Kuota Revisi)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="315" y="245" width="175" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="func_kalender" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Kalender Editorial&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(&amp;amp; Publikasi Konten)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="510" y="245" width="175" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="system_footer" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#555555;fontStyle=2;" value="BEM FT UNSOED Ticketing &amp;amp; Workflow Management Engine" vertex="1">
+          <mxGeometry x="290" y="420" width="420" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_klien" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=14;fontColor=#000000;align=center;" value="&lt;b&gt;Klien&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 12px;&quot;&gt;(14 Kementerian)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="40" y="215" width="170" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_admin" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=14;fontColor=#000000;align=center;" value="&lt;b&gt;Admin&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 12px;&quot;&gt;(Menteri Medkreminfo)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="790" y="115" width="170" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="actor_eksekutor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=14;fontColor=#000000;align=center;" value="&lt;b&gt;Eksekutor&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11.5px;&quot;&gt;(Staf Medkreminfo)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="790" y="305" width="170" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="conn_klien_sys" parent="1" source="actor_klien" target="system_container" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;endArrow=classic;strokeColor=#000000;strokeWidth=1.5;fontSize=11;fontColor=#000000;align=center;verticalAlign=bottom;labelBackgroundColor=#ffffff;" value="brief, aset&#xa;/ status, draf" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="257.5" as="sourcePoint" />
+            <mxPoint x="290" y="257.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conn_sys_admin" parent="1" source="system_container" target="actor_admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;endArrow=classic;strokeColor=#000000;strokeWidth=1.5;fontSize=11;fontColor=#000000;align=center;verticalAlign=bottom;labelBackgroundColor=#ffffff;" value="validasi brief&#xa;&amp;amp; penugasan" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="157.5" as="sourcePoint" />
+            <mxPoint x="790" y="157.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="750" y="158" />
+              <mxPoint x="750" y="158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="conn_sys_eksekutor" parent="1" source="system_container" target="actor_eksekutor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;endArrow=classic;strokeColor=#000000;strokeWidth=1.5;fontSize=11;fontColor=#000000;align=center;verticalAlign=bottom;labelBackgroundColor=#ffffff;" value="eksekusi tugas&#xa;&amp;amp; unggah draf" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="347.5" as="sourcePoint" />
+            <mxPoint x="790" y="347.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="750" y="348" />
+              <mxPoint x="750" y="348" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+```
+
+</details>
 
 ### 2.3 Asumsi dan Constraint
 1. Pengguna mengakses sistem menggunakan peramban web modern yang mendukung JavaScript, CSS3, dan transmisi berkas HTML5 melalui jaringan internet kampus.
@@ -356,10 +427,62 @@ Penetapan prioritas kebutuhan dilakukan secara rasional dengan mempertimbangkan 
 
 RTM menghubungkan requirement dengan sumber (*evidence*), *pain point*, *acceptance criteria*, dan artefak model berikutnya. Pada tahap Pertemuan 5, kolom model/desain merupakan rencana artefak yang dilengkapi saat BPMN, use case, dan diagram lanjutan diselesaikan pada pertemuan selanjutnya.
 
-![Gambar 2. Contoh rantai traceability dari evidence sampai model berikutnya](diagram_traceability_chain.png)
+![Gambar 2. Contoh rantai traceability dari evidence sampai model berikutnya](diagram_traceability_chain.svg)
 
-*Gambar 2. Contoh rantai traceability dari evidence sampai model berikutnya.*  
-*Prinsip: setiap artefak penting memiliki alasan keberadaan dan hubungan yang dapat ditelusuri.*
+*Gambar 2. Contoh rantai traceability dari evidence sampai model berikutnya (Monokrom/Hitam Putih).*  
+*Prinsip: setiap artefak penting memiliki alasan keberadaan dan hubungan yang dapat ditelusuri.*  
+Berkas sumber diagram berbasis XML dapat diakses melalui berkas Draw.io XML [diagram_traceability_chain.drawio](diagram_traceability_chain.drawio) / [diagram_traceability_chain.xml](diagram_traceability_chain.xml) serta berkas vektor [diagram_traceability_chain.svg](diagram_traceability_chain.svg).
+
+<details>
+<summary><b>Kode XML Draw.io - Gambar 2 (Klik untuk melihat/menyalin)</b></summary>
+
+```xml
+<mxfile host="app.diagrams.net" agent="Antigravity" version="24.0.0">
+  <diagram name="Traceability Chain - Medkreminfo" id="diagram_traceability_medkreminfo">
+    <mxGraphModel dx="1200" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1050" pageHeight="300" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title_traceability" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=15;fontColor=#000000;fontStyle=1;" value="Traceability Chain – Layanan Pemesanan Konten Medkreminfo" vertex="1">
+          <mxGeometry x="100" y="20" width="800" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="node_evidence" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.8;fontSize=12.5;fontColor=#000000;align=center;" value="&lt;b&gt;Evidence (W02)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;Pesanan tenggelam&lt;br&gt;di chat WhatsApp&lt;/font&gt;" vertex="1">
+          <mxGeometry x="30" y="65" width="160" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="node_painpoint" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.8;fontSize=12.5;fontColor=#000000;align=center;" value="&lt;b&gt;Pain Point (PP-01)&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;Status pengerjaan&lt;br&gt;tidak terlihat pemesan&lt;/font&gt;" vertex="1">
+          <mxGeometry x="228" y="65" width="160" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="node_fr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.8;fontSize=12.5;fontColor=#000000;align=center;" value="&lt;b&gt;FR-05&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;Tampilkan status tiket&lt;br&gt;secara real-time&lt;/font&gt;" vertex="1">
+          <mxGeometry x="426" y="65" width="160" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="node_ac" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.8;fontSize=12.5;fontColor=#000000;align=center;" value="&lt;b&gt;AC-06&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;Status tampil = status&lt;br&gt;tahapan di database&lt;/font&gt;" vertex="1">
+          <mxGeometry x="624" y="65" width="160" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="node_model" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.8;fontSize=12.5;fontColor=#000000;align=center;" value="&lt;b&gt;Next Model&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;UC Lacak Progres /&lt;br&gt;State Diagram Tiket&lt;/font&gt;" vertex="1">
+          <mxGeometry x="822" y="65" width="160" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_1_2" parent="1" source="node_evidence" target="node_painpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#000000;strokeWidth=1.8;" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_2_3" parent="1" source="node_painpoint" target="node_fr" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#000000;strokeWidth=1.8;" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_3_4" parent="1" source="node_fr" target="node_ac" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#000000;strokeWidth=1.8;" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_4_5" parent="1" source="node_ac" target="node_model" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#000000;strokeWidth=1.8;" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note_principle" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11.5;fontColor=#555555;fontStyle=2;" value="Prinsip: setiap artefak penting memiliki alasan keberadaan dan hubungan yang dapat ditelusuri." vertex="1">
+          <mxGeometry x="100" y="180" width="800" height="25" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+```
+
+</details>
 
 | Req ID | Source (Evidence) | Pain Point / Target Bisnis | Acceptance Criteria | Model / Artefak Lanjutan | Status |
 |---|---|---|---|---|---|

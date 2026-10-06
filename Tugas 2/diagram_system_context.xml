@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" agent="Antigravity" version="24.0.0">
+  <diagram name="Diagram Konteks - Medkreminfo" id="diagram_context_medkreminfo">
+    <mxGraphModel dx="1200" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1050" pageHeight="560" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Container Sistem Utama (Boundary) -->
+        <mxCell id="system_container" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fbfbfb;strokeColor=#000000;strokeWidth=2;verticalAlign=top;spacingTop=20;fontSize=15;fontStyle=1;fontColor=#000000;" value="SISTEM INFORMASI LAYANAN&#xa;PEMESANAN KONTEN MEDKREMINFO" vertex="1">
+          <mxGeometry x="290" y="50" width="420" height="410" as="geometry" />
+        </mxCell>
+
+        <!-- Modul Internal 1: Pemesanan Konten -->
+        <mxCell id="func_pemesanan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Pemesanan Konten&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(Multi-Kanal &amp;amp; Brief)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="315" y="145" width="175" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Modul Internal 2: Validasi & Disposisi -->
+        <mxCell id="func_validasi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Validasi &amp;amp; Disposisi&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(Penugasan Eksekutor)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="510" y="145" width="175" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Modul Internal 3: Pelacakan Status -->
+        <mxCell id="func_pelacakan" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Pelacakan Status&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(Review &amp;amp; Kuota Revisi)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="315" y="245" width="175" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Modul Internal 4: Kalender Editorial -->
+        <mxCell id="func_kalender" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.5;fontSize=12;fontColor=#000000;align=center;" value="&lt;b&gt;Kalender Editorial&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11px;&quot;&gt;(&amp;amp; Publikasi Konten)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="510" y="245" width="175" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Footer / Catatan Sub-sistem -->
+        <mxCell id="system_footer" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontColor=#555555;fontStyle=2;" value="BEM FT UNSOED Ticketing &amp;amp; Workflow Management Engine" vertex="1">
+          <mxGeometry x="290" y="420" width="420" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- External Actor 1: Klien -->
+        <mxCell id="actor_klien" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=14;fontColor=#000000;align=center;" value="&lt;b&gt;Klien&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 12px;&quot;&gt;(14 Kementerian)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="40" y="215" width="170" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- External Actor 2: Admin -->
+        <mxCell id="actor_admin" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=14;fontColor=#000000;align=center;" value="&lt;b&gt;Admin&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 12px;&quot;&gt;(Menteri Medkreminfo)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="790" y="115" width="170" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- External Actor 3: Eksekutor -->
+        <mxCell id="actor_eksekutor" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;strokeWidth=2;fontSize=14;fontColor=#000000;align=center;" value="&lt;b&gt;Eksekutor&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#333333&quot; style=&quot;font-size: 11.5px;&quot;&gt;(Staf Medkreminfo)&lt;/font&gt;" vertex="1">
+          <mxGeometry x="790" y="305" width="170" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- Koneksi: Klien <-> Sistem -->
+        <mxCell id="conn_klien_sys" parent="1" source="actor_klien" target="system_container" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;endArrow=classic;strokeColor=#000000;strokeWidth=1.5;fontSize=11;fontColor=#000000;align=center;verticalAlign=bottom;labelBackgroundColor=#ffffff;" value="brief, aset&#xa;/ status, draf" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="257.5" as="sourcePoint" />
+            <mxPoint x="290" y="257.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Koneksi: Sistem <-> Admin -->
+        <mxCell id="conn_sys_admin" parent="1" source="system_container" target="actor_admin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;endArrow=classic;strokeColor=#000000;strokeWidth=1.5;fontSize=11;fontColor=#000000;align=center;verticalAlign=bottom;labelBackgroundColor=#ffffff;" value="validasi brief&#xa;&amp;amp; penugasan" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="157.5" as="sourcePoint" />
+            <mxPoint x="790" y="157.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="750" y="158" />
+              <mxPoint x="750" y="158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Koneksi: Sistem <-> Eksekutor -->
+        <mxCell id="conn_sys_eksekutor" parent="1" source="system_container" target="actor_eksekutor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;endArrow=classic;strokeColor=#000000;strokeWidth=1.5;fontSize=11;fontColor=#000000;align=center;verticalAlign=bottom;labelBackgroundColor=#ffffff;" value="eksekusi tugas&#xa;&amp;amp; unggah draf" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="347.5" as="sourcePoint" />
+            <mxPoint x="790" y="347.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="750" y="348" />
+              <mxPoint x="750" y="348" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

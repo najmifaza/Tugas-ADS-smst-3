@@ -1,148 +1,133 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="100%" height="100%">
-  <defs>
-    <!-- Arrowhead Markers -->
-    <marker id="arrow-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#028090" />
-    </marker>
-    <marker id="arrow-teal-rev" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 8 1.5 L 0 5 L 8 8.5 z" fill="#028090" />
-    </marker>
-    <marker id="arrow-navy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1A365D" />
-    </marker>
-    <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#E67E22" />
-    </marker>
-
-    <!-- Drop Shadows -->
-    <filter id="box-shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F2438" flood-opacity="0.08" />
-    </filter>
-  </defs>
-
   <!-- Background Canvas -->
   <rect width="1000" height="520" fill="#FFFFFF" />
 
   <!-- ==================== CENTRAL SYSTEM CONTAINER ==================== -->
-  <rect x="290" y="50" width="420" height="410" rx="18" fill="#F4F8FC" stroke="#1A365D" stroke-width="2.5" filter="url(#box-shadow)" />
+  <rect x="290" y="50" width="420" height="410" rx="16" fill="#FBFBFB" stroke="#000000" stroke-width="2.5" />
 
   <!-- System Header Text -->
-  <text x="500" y="92" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#1A365D" text-anchor="middle" letter-spacing="1">
+  <text x="500" y="92" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#000000" text-anchor="middle" letter-spacing="1">
     SISTEM INFORMASI LAYANAN
   </text>
-  <text x="500" y="114" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#1A365D" text-anchor="middle" letter-spacing="1">
+  <text x="500" y="114" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="800" fill="#000000" text-anchor="middle" letter-spacing="1">
     PEMESANAN KONTEN MEDKREMINFO
   </text>
 
   <!-- Inner Function 1: Ajukan & Kelola Pesanan -->
   <g transform="translate(315, 145)">
-    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#028090" stroke-width="2" filter="url(#box-shadow)" />
-    <text x="87" y="32" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#1A365D" text-anchor="middle">
+    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <text x="87" y="32" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#000000" text-anchor="middle">
       Pemesanan Konten
     </text>
-    <text x="87" y="49" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#4A5568" text-anchor="middle">
+    <text x="87" y="49" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#333333" text-anchor="middle">
       (Multi-Kanal &amp; Brief)
     </text>
   </g>
 
   <!-- Inner Function 2: Validasi & Penugasan Staf -->
   <g transform="translate(510, 145)">
-    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#028090" stroke-width="2" filter="url(#box-shadow)" />
-    <text x="87" y="32" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#1A365D" text-anchor="middle">
+    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <text x="87" y="32" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#000000" text-anchor="middle">
       Validasi &amp; Disposisi
     </text>
-    <text x="87" y="49" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#4A5568" text-anchor="middle">
+    <text x="87" y="49" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#333333" text-anchor="middle">
       (Penugasan Eksekutor)
     </text>
   </g>
 
   <!-- Inner Function 3: Pelacakan Progres & Revisi -->
   <g transform="translate(315, 240)">
-    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#028090" stroke-width="2" filter="url(#box-shadow)" />
-    <text x="87" y="32" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#1A365D" text-anchor="middle">
+    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <text x="87" y="32" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#000000" text-anchor="middle">
       Pelacakan Status
     </text>
-    <text x="87" y="49" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#4A5568" text-anchor="middle">
+    <text x="87" y="49" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#333333" text-anchor="middle">
       (Review &amp; Kuota Revisi)
     </text>
   </g>
 
   <!-- Inner Function 4: Kalender Editorial & Publikasi -->
   <g transform="translate(510, 240)">
-    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#028090" stroke-width="2" filter="url(#box-shadow)" />
-    <text x="87" y="32" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#1A365D" text-anchor="middle">
+    <rect width="175" height="70" rx="10" fill="#FFFFFF" stroke="#000000" stroke-width="1.8" />
+    <text x="87" y="32" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#000000" text-anchor="middle">
       Kalender Editorial
     </text>
-    <text x="87" y="49" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#4A5568" text-anchor="middle">
+    <text x="87" y="49" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#333333" text-anchor="middle">
       (&amp; Publikasi Konten)
     </text>
   </g>
 
   <!-- Footer Note inside System -->
-  <text x="500" y="435" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#718096" text-anchor="middle" font-style="italic">
+  <text x="500" y="435" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" fill="#555555" text-anchor="middle" font-style="italic">
     BEM FT UNSOED Ticketing &amp; Workflow Management Engine
   </text>
 
 
   <!-- ==================== EXTERNAL ACTOR 1: KLIEN (LEFT) ==================== -->
   <g transform="translate(40, 215)">
-    <rect width="170" height="85" rx="12" fill="#FFFFFF" stroke="#028090" stroke-width="2.5" filter="url(#box-shadow)" />
-    <text x="85" y="38" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#1A365D" text-anchor="middle">
+    <rect width="170" height="85" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" />
+    <text x="85" y="38" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#000000" text-anchor="middle">
       Klien
     </text>
-    <text x="85" y="58" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#028090" text-anchor="middle">
+    <text x="85" y="58" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#333333" text-anchor="middle">
       (14 Kementerian)
     </text>
   </g>
 
   <!-- Connection: Klien <-> System -->
-  <line x1="210" y1="257" x2="288" y2="257" stroke="#028090" stroke-width="2" marker-end="url(#arrow-teal)" marker-start="url(#arrow-teal-rev)" />
-  <text x="250" y="235" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#4A5568" text-anchor="middle">
+  <line x1="218" y1="257.5" x2="282" y2="257.5" stroke="#000000" stroke-width="1.8" />
+  <polygon points="218,252.5 210,257.5 218,262.5" fill="#000000" />
+  <polygon points="282,252.5 290,257.5 282,262.5" fill="#000000" />
+  <text x="250" y="235" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
     brief, aset
   </text>
-  <text x="250" y="249" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#4A5568" text-anchor="middle">
+  <text x="250" y="249" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
     / status, draf
   </text>
 
 
   <!-- ==================== EXTERNAL ACTOR 2: ADMIN (RIGHT TOP) ==================== -->
   <g transform="translate(790, 115)">
-    <rect width="170" height="85" rx="12" fill="#FFFFFF" stroke="#1A365D" stroke-width="2.5" filter="url(#box-shadow)" />
-    <text x="85" y="38" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#1A365D" text-anchor="middle">
+    <rect width="170" height="85" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" />
+    <text x="85" y="38" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#000000" text-anchor="middle">
       Admin
     </text>
-    <text x="85" y="58" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1A365D" text-anchor="middle">
+    <text x="85" y="58" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#333333" text-anchor="middle">
       (Menteri Medkreminfo)
     </text>
   </g>
 
-  <!-- Connection: System -> Admin -->
-  <line x1="710" y1="157" x2="788" y2="157" stroke="#1A365D" stroke-width="2" marker-end="url(#arrow-navy)" marker-start="url(#arrow-navy)" />
-  <text x="750" y="138" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#4A5568" text-anchor="middle">
+  <!-- Connection: System <-> Admin -->
+  <line x1="718" y1="157.5" x2="782" y2="157.5" stroke="#000000" stroke-width="1.8" />
+  <polygon points="718,152.5 710,157.5 718,162.5" fill="#000000" />
+  <polygon points="782,152.5 790,157.5 782,162.5" fill="#000000" />
+  <text x="750" y="138" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
     validasi brief
   </text>
-  <text x="750" y="152" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#4A5568" text-anchor="middle">
+  <text x="750" y="152" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
     &amp; penugasan
   </text>
 
 
   <!-- ==================== EXTERNAL ACTOR 3: EKSEKUTOR (RIGHT BOTTOM) ==================== -->
   <g transform="translate(790, 305)">
-    <rect width="170" height="85" rx="12" fill="#FFFFFF" stroke="#E67E22" stroke-width="2.5" filter="url(#box-shadow)" />
-    <text x="85" y="38" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#1A365D" text-anchor="middle">
+    <rect width="170" height="85" rx="12" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" />
+    <text x="85" y="38" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="14.5" font-weight="800" fill="#000000" text-anchor="middle">
       Eksekutor
     </text>
-    <text x="85" y="58" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="600" fill="#E67E22" text-anchor="middle">
+    <text x="85" y="58" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="600" fill="#333333" text-anchor="middle">
       (Staf Medkreminfo)
     </text>
   </g>
 
-  <!-- Connection: System -> Eksekutor -->
-  <line x1="710" y1="347" x2="788" y2="347" stroke="#E67E22" stroke-width="2" marker-end="url(#arrow-orange)" marker-start="url(#arrow-orange)" />
-  <text x="750" y="328" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#4A5568" text-anchor="middle">
+  <!-- Connection: System <-> Eksekutor -->
+  <line x1="718" y1="347.5" x2="782" y2="347.5" stroke="#000000" stroke-width="1.8" />
+  <polygon points="718,342.5 710,347.5 718,352.5" fill="#000000" />
+  <polygon points="782,342.5 790,347.5 782,352.5" fill="#000000" />
+  <text x="750" y="328" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
     eksekusi tugas
   </text>
-  <text x="750" y="342" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#4A5568" text-anchor="middle">
+  <text x="750" y="342" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" fill="#000000" text-anchor="middle">
     &amp; unggah draf
   </text>
 

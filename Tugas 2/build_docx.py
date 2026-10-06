@@ -339,11 +339,25 @@ def build_srs_docx(md_path, docx_path):
                 i += 1
                 continue
 
+        # Code block & HTML details tags (skip from printable DOCX body)
+        if stripped.startswith('<details') or stripped.startswith('</details') or stripped.startswith('<summary') or stripped.startswith('</summary'):
+            i += 1
+            continue
+
+        if stripped.startswith('```'):
+            i += 1
+            while i < len(raw_lines) and not raw_lines[i].strip().startswith('```'):
+                i += 1
+            i += 1
+            continue
+
         # Images
         img_match = re.match(r'!\[(.*?)\]\((.*?)\)', stripped)
         if img_match:
             alt_text, img_file = img_match.groups()
-            img_path = os.path.join(os.path.dirname(md_path), img_file)
+            png_file = re.sub(r'\.svg$', '.png', img_file)
+            target_file = png_file if os.path.exists(os.path.join(os.path.dirname(md_path), png_file)) else img_file
+            img_path = os.path.join(os.path.dirname(md_path), target_file)
             if os.path.exists(img_path):
                 p_img = doc.add_paragraph()
                 p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
