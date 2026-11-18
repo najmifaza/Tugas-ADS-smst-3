@@ -4,7 +4,7 @@
 
 **Tugas 3 · IF21307 Analisis dan Desain Sistem · tahap v1.0 (Pertemuan 10) dan v1.1 (Pertemuan 11)**
 
-> Catatan penyusun: berkas ini adalah salinan kumulatif. Bab 1–5, 6.1, dan 7.1 adalah isi tahap **v1.0**; Bab 6.2, 7.2–7.5, dan Lampiran A adalah penambahan tahap **v1.1**. Baris peer review pada Bab 7.5 ditandai `[ISI SAAT PEER REVIEW]` karena menunggu pertukaran dokumen dengan kelompok lain.
+> Catatan penyusun: berkas ini adalah salinan kumulatif. Bab 1–5 dan 6.1 adalah isi tahap **v1.0**; Bab 6.2, Bab 7 (RTM 7.1 s.d. Defect Log 7.5), dan Lampiran A adalah penambahan tahap **v1.1**. Baris peer review pada Bab 7.5 ditandai `[ISI SAAT PEER REVIEW]` karena menunggu pertukaran dokumen dengan kelompok lain.
 
 ---
 
@@ -39,7 +39,7 @@ Secara operasional, dokumen ini mentransformasikan 16 kebutuhan fungsional (FR-0
 | ERD-P10 | ERD kandidat Pertemuan 10 (tugas mandiri) | Entitas, atribut, dan relasi hasil analisis UC-01 | Basis penamaan entitas dan atribut ERD logis Bab 4.2; entitas baru dicatat pada defect log v1.1. |
 | RTM v1.0 | Requirements Traceability Matrix (SRS Bab 9) | Keterlacakan kebutuhan ke evidence, pain point, dan AC | Diperluas pada Bab 7.1 sampai mencakup Sequence Diagram, entitas/kolom ERD, IC, dan metode kelas domain. |
 | BPMN-01 | BPMN To-Be Proses Bisnis (satu berkas `SDD_Medkreminfo_Diagram.drawio`, tab Lampiran D.1) | Alur proses bisnis lintas swimlane aktor; gateway SLA, kelayakan brief, beban kerja, dan kuota revisi | Dasar penetapan urutan serah terima tugas (hand-off) Klien → Admin → Eksekutor → Staf Medsos pada Bab 3. |
-| UCD-01 | Use Case Diagram & Narrative (satu berkas `SDD_Medkreminfo_Diagram.drawio`, tab Lampiran D.2) | Batasan fungsi sistem dan aktor, relasi `<<include>>`/`<<extend>>` | Menentukan ruang lingkup use case yang dimodelkan; narasi UC-01 s.d. UC-04 pada SRS §6.2 dipakai langsung sebagai sumber Bab 2.2 dan Bab 3. | |
+| UCD-01 | Use Case Diagram & Narrative (satu berkas `SDD_Medkreminfo_Diagram.drawio`, tab Lampiran D.2) | Batasan fungsi sistem dan aktor, relasi `<<include>>`/`<<extend>>` | Menentukan ruang lingkup use case yang dimodelkan; narasi UC-01 s.d. UC-04 pada SRS §6.2 dipakai langsung sebagai sumber Bab 2.2 dan Bab 3. |
 | AD-01..AD-04 | Activity Diagram per Use Case (satu berkas `SDD_Medkreminfo_Diagram.drawio`, tab Lampiran D.3 s.d. D.6) | Alur kerja prosedural, swimlane, dan percabangan aksi (guard) | Dasar pemetaan langkah aksi menjadi pertukaran pesan (messages) antar-lifeline pada Bab 3. |
 
 Catatan ketersediaan artefak: seluruh artefak hulu yang dirujuk tabel di atas kini tersedia di repository kelompok — PC-01, EL-01, SRS v1.0, RTM v1.0, ERD-P10, serta BPMN-01, UCD-01, dan AD-01..AD-04 yang disertakan pada Lampiran D (`diagrams_upstream/`). Penurunan desain tetap bersandar pada SRS v1.0 sebagai sumber kebenaran tunggal kebutuhan, sedangkan artefak proses dan perilaku dipakai untuk menetapkan urutan serah terima tugas dan pemetaan langkah aksi menjadi pesan.
@@ -200,7 +200,7 @@ sequenceDiagram
 | Partisipan / Lifeline Terlibat | 1. `:Klien` (Actor); 2. `:FormPemesananUI` (`«boundary»`); 3. `:PengajuanController` (`«control»`); 4. `:PENGGUNA` (`«entity»`); 5. `:TIKET_PESANAN` (`«entity»`); 6. `:BERKAS_ASET` (`«entity»`) |
 | Precondition (Kondisi Prasyarat) | Klien telah terautentikasi (FR-01) dan data master KEMENTERIAN serta akun Klien tersedia; tiket belum melewati batas maksimal aset per tiket. |
 | Trigger (Pemicu Interaksi) | Klien memilih menu "Buat Pesanan Konten Baru" pada dasbor Klien. |
-| Main Flow (Alur Normal / Sukses) | Langkah 1: `:Klien` memicu pesan 1 `bukaFormPemesanan()` pada `:FormPemesananUI`. Langkah 2–4: `:PengajuanController` memverifikasi peran pemanggil melalui 3 `cekPeran(id_pengguna)` pada `:PENGGUNA` dan menerima 4 `role = "Klien"`. Langkah 5–8: Klien mengisi kanal, jenis konten, tanggal target tayang, dan brief (pesan 5); `:PengajuanController` menerima 6 `periksaSLA(kanal_tujuan, jenis_konten, tanggal_target_tayang)`, memanggil 7 `validasiSLA(kanal_tujuan, jenis_konten)` pada `:TIKET_PESANAN`, dan menerima 8 `is_rush_order` beserta selisih hari. Langkah 11–14: Klien mengunggah aset; controller meminta 13 `validasiFormatBerkas(nama_file, format_file, ukuran_mb)` pada `:BERKAS_ASET`. Langkah 16–22: pada `kirimPermohonan()`, controller membangkitkan `id_tiket` (18–19), memanggil 20 `ajukan(...)` pada `:TIKET_PESANAN`, dan 21 `simpanBerkas(...)` pada `:BERKAS_ASET`. Langkah 23–24: `:FormPemesananUI` merender konfirmasi berisi ID tiket dan status `Submitted` ke Klien. |
+| Main Flow (Alur Normal / Sukses) | Langkah 1: `:Klien` memicu pesan 1 `bukaFormPemesanan()` pada `:FormPemesananUI`. Langkah 2–4: `:PengajuanController` memverifikasi peran pemanggil melalui 3 `cekPeran(id_pengguna)` pada `:PENGGUNA` dan menerima 4 `role = "Klien"`. Langkah 5–8: Klien mengisi kanal, jenis konten, tanggal target tayang, dan brief (pesan 5); `:PengajuanController` menerima 6 `periksaSLA(kanal_tujuan, jenis_konten, tanggal_target_tayang)`, memanggil 7 `validasiSLA(kanal_tujuan, jenis_konten)` pada `:TIKET_PESANAN`, dan menerima 8 `is_rush_order` beserta selisih hari. Langkah 11–14: Klien mengunggah aset; controller meminta 13 `validasiFormatBerkas(nama_file, format_file, ukuran_mb)` pada `:BERKAS_ASET`. Langkah 16–22: pada `kirimPermohonan()`, controller membangkitkan `id_tiket` (18–19), memanggil 20 `ajukan(judul_publikasi, kanal_tujuan, jenis_konten, tanggal_target_tayang, deskripsi_brief, is_rush_order, alasan_darurat)` pada `:TIKET_PESANAN`, dan 21 `simpanBerkas(...)` pada `:BERKAS_ASET`. Langkah 23–24: `:FormPemesananUI` merender konfirmasi berisi ID tiket dan status `Submitted` ke Klien. |
 | Alternate Flow (Alur Alternatif) | Kondisi selisih hari kurang dari batas kanal (BR-01) — direalisasikan sebagai combined fragment `opt` karena hanya berlaku satu arah: Langkah 9a: `:PengajuanController` memanggil `mintaAlasanDarurat()` dan `:FormPemesananUI` membuka kolom alasan darurat. Langkah 10a: Klien mengisi `isiAlasanDarurat(teks)`; tiket diberi `is_rush_order = true` dan alur kembali ke langkah 11. |
 | Exception Flow (Alur Eksepsi / Gagal) | Kondisi format/ukuran berkas tidak didukung atau berkas > 50 MB tanpa tautan Google Drive (BR-05): Langkah 15b: `:PengajuanController` mendeteksi kegagalan validasi, membatalkan penyimpanan berkas, dan mengembalikan pesan kesalahan. Langkah 15c: `:FormPemesananUI` menampilkan pesan "Format berkas tidak didukung. Unggah berkas valid atau cantumkan tautan Google Drive"; alur kembali ke langkah 11 tanpa membuat tiket. |
 | Postcondition (Kondisi Akhir) | Satu baris `TIKET_PESANAN` baru tersimpan dengan `status_tiket = Submitted` (atau `Submitted` + `is_rush_order = true`), baris `BERKAS_ASET` terkait tersimpan dengan `status_purge = false`, dan tiket muncul pada antrean verifikasi Admin. |
@@ -469,6 +469,7 @@ erDiagram
         Angka id_eksekutor FK
         Teks judul_publikasi
         Enumerasi kanal_tujuan
+        Enumerasi jenis_konten
         Tanggal tanggal_target_tayang
         TanggalWaktu tanggal_pengajuan
         TeksPanjang deskripsi_brief
@@ -547,7 +548,7 @@ Keterangan penanda: `PK` = kunci utama; `FK` = kunci tamu, atribut yang boleh ko
 |---|---|---|---|---|
 | KEMENTERIAN | id_kementerian (tunggal) | 1NF: atomik. 2NF: PK tunggal. 3NF: tidak ada ketergantungan transitif. | Disimpan: nama_kementerian, kode_kementerian. | Nama dan kode kementerian dipakai berulang di halaman Klien maupun Admin, jadi disimpan sekali sebagai data referensi (FR-05, FR-06). |
 | PENGGUNA | id_pengguna (tunggal) | 1NF: atomik. 2NF: PK tunggal. 3NF: nama_kementerian tidak disimpan di sini, hanya `id_kementerian`. | Disimpan: email, password_hash, role, no_whatsapp, spesialisasi. Tidak disimpan: nama_kementerian (FK menuju KEMENTERIAN). `spesialisasi` boleh kosong untuk peran Klien. | FR-01, FR-16, NFR-SEC-01. Menyimpan nama kementerian di dua tabel akan membuat dua sumber kebenaran yang bisa berbeda (pelanggaran 3NF). |
-| TIKET_PESANAN | id_tiket (tunggal) | 1NF: atomik. 2NF: PK tunggal. 3NF: tidak ada ketergantungan transitif. | Disimpan: judul_publikasi, kanal_tujuan, tanggal_target_tayang, tanggal_pengajuan, deskripsi_brief, status_tiket, is_rush_order, alasan_darurat, catatan_penolakan, tanggal_verifikasi, waktu_penugasan. `/kuota_revisi_terpakai` dihitung, tidak disimpan. `/selisih_hari` dihitung, tidak disimpan. | BR-01, BR-02, FR-03, FR-12. `is_rush_order` adalah akibat keputusan bisnis yang perlu dibaca berulang, jadi nilainya disimpan; selisih harinya sendiri tidak. |
+| TIKET_PESANAN | id_tiket (tunggal) | 1NF: atomik. 2NF: PK tunggal. 3NF: tidak ada ketergantungan transitif. | Disimpan: judul_publikasi, kanal_tujuan, jenis_konten, tanggal_target_tayang, tanggal_pengajuan, deskripsi_brief, status_tiket, is_rush_order, alasan_darurat, catatan_penolakan, tanggal_verifikasi, waktu_penugasan. `/kuota_revisi_terpakai` dihitung, tidak disimpan. `/selisih_hari` dihitung, tidak disimpan. | BR-01, BR-02, FR-03, FR-12. `is_rush_order` adalah akibat keputusan bisnis yang perlu dibaca berulang, jadi nilainya disimpan; selisih harinya sendiri tidak. |
 | BERKAS_ASET | id_aset (tunggal) | 1NF: atomik. 2NF: PK tunggal. 3NF: ukuran dan format bergantung pada berkas, bukan pada tiket. | Disimpan: nama_file, file_path, ukuran_mb, format_file, tautan_gdrive, status_purge, tanggal_unggah. | FR-04, BR-05. `status_purge` perlu disimpan agar auto-purge tidak menghapus metadata tiket dan tautan tayang. |
 | DRAF_KARYA | id_draf (tunggal); UK (id_tiket, versi_draf) | 1NF: atomik. 2NF: tidak ada ketergantungan parsial karena PK tunggal. 3NF: nomor versi hanya bergantung pada pasangan tiket dan urutan unggahan. | Disimpan: versi_draf, file_path_preview, tautan_preview_video, catatan_draf, tanggal_unggah. | FR-11, AC-13. Draf lama tidak ditimpa agar riwayat versi tetap dapat diaudit. |
 | RIWAYAT_REVISI | id_revisi (tunggal); UK (id_tiket, revisi_ke) | 1NF: atomik. 2NF: tidak ada ketergantungan parsial. 3NF: `revisi_ke` bergantung pada nomor urut revisi tiket, bukan pada atribut non-kunci lain. | Disimpan: revisi_ke, poin_revisi, tanggal_pengajuan_revisi. | FR-12, BR-02. Pembatasan kuota 2 kali ditegakkan dengan menghitung baris, bukan dengan kolom penghitung. |
@@ -675,7 +676,7 @@ Catatan konsistensi: seluruh atribut pada ERD logis Bab 4.2 terdefinisi di kamus
 | IC-05 | Domain | BERKAS_ASET | ukuran_mb > 0 dan (ukuran_mb ≤ 50 OR tautan_gdrive ≠ kosong); berkas di atas 50 MB hanya boleh lewat tautan penyimpanan awan. | FR-04, BR-05 | Modul |
 | IC-06 | Bisnis (Lintas entitas) | RIWAYAT_REVISI, TIKET_PESANAN | Jumlah baris RIWAYAT_REVISI per tiket ≤ 2 dan revisi_ke ∈ {1, 2}; permintaan revisi ke-3 ditolak. | FR-12, BR-02, AC-14, AC-15 | Modul |
 | IC-07 | Bisnis (Temporal) | TIKET_PESANAN | Selisih hari = tanggal_target_tayang − tanggal_pengajuan; batas minimum menurut kanal dan jenis konten: H-4 (Poster di Feeds/Story), H-5 (Carousel dan Siaran Pers di LinkedIn), H-7 (Video di TikTok). Bila kurang, maka is_rush_order = true dan alasan_darurat ≠ kosong. | FR-03, BR-01, AC-04 | Modul |
-| IC-08 | Bisnis (Lintas entitas) | PENGGUNA, TIKET_PESANAN | Jumlah tiket berstatus `In Progress` per id_eksekutor ≤ 3; penugasan ke-4 memicu peringatan wajib konfirmasi Admin. | FR-08, FR-09, BR-04, AC-10 | Modul |
+| IC-08 | Bisnis (Lintas entitas) | PENGGUNA, TIKET_PESANAN | Jumlah tiket aktif dengan status_tiket ∈ {Assigned, In Progress, Revision} per id_eksekutor ≤ 3; penugasan ke-4 memicu peringatan wajib konfirmasi Admin. | FR-08, FR-09, BR-04, AC-10 | Modul |
 | IC-09 | Bisnis (Bersyarat) | TIKET_PESANAN, BERKAS_ASET, DRAF_KARYA, RIWAYAT_REVISI, RIWAYAT_PENUGASAN, PUBLIKASI_KONTEN | Atribut wajib terisi sesuai status atau kondisi: alasan_darurat wajib bila is_rush_order = true; catatan_penolakan dan tanggal_verifikasi wajib bila status ∈ {Rejected, Revision Required}; id_eksekutor dan waktu_penugasan wajib bila status ∈ {Assigned, In Progress, Review, Revision, Ready to Post, Published}; file_path_preview atau tautan_preview_video wajib salah satu; alasan_mutasi wajib bila jenis_penugasan = mutasi; url_postingan_medsos dan tanggal_terbit wajib bila tiket berstatus `Published`. | FR-03, FR-07, FR-11, FR-15 | Modul |
 | IC-10 | Bisnis (Transisi) | TIKET_PESANAN | Status hanya berpindah mengikuti alur: `Submitted → {Rejected, Revision Required, Assigned}`; `Assigned → In Progress`; `In Progress → Review`; `Review → {Revision, Ready to Post}`; `Revision → In Progress`; `Ready to Post → Published`. Perpindahan di luar daftar ini ditolak. | FR-05, FR-07, FR-11, FR-13, FR-15 | Modul |
 | IC-11 | Bisnis (Temporal / Retensi) | BERKAS_ASET | status_purge hanya boleh berubah dari false menjadi true setelah TIKET_PESANAN.status_tiket = Published; saat berubah, file_path dikosongkan dan metadata (nama_file, ukuran_mb, format_file, tautan_gdrive) tetap utuh. | FR-04, FR-15, BR-05, AC-05, AC-18 | Modul (dan basis data bila memungkinkan) |
@@ -699,19 +700,22 @@ classDiagram
     }
     class PENGGUNA {
         +id_pengguna : Angka
+        +id_kementerian : Angka
         +nama_lengkap : Teks
         +email : Teks
         +role : Enumerasi
         +spesialisasi : Enumerasi
         +no_whatsapp : Teks
         +autentikasi(email : Teks, sandi : Teks) : Boolean
-        +cekPeran() : Enumerasi
+        +cekPeran(id_pengguna : Angka) : Enumerasi
         +daftarEksekutor(spesialisasi : Enumerasi) : List~PENGGUNA~
-        +hitungTiketAktif() : Angka
+        +hitungTiketAktif(id_eksekutor : Angka) : Angka
         +ubahProfil(nama : Teks, no_whatsapp : Teks) : void
     }
     class TIKET_PESANAN {
         +id_tiket : Teks
+        +id_pemohon : Angka
+        +id_eksekutor : Angka
         +judul_publikasi : Teks
         +kanal_tujuan : Enumerasi
         +jenis_konten : Enumerasi
@@ -722,20 +726,23 @@ classDiagram
         +is_rush_order : Boolean
         +alasan_darurat : TeksPanjang
         +catatan_penolakan : TeksPanjang
+        +tanggal_verifikasi : TanggalWaktu
+        +waktu_penugasan : TanggalWaktu
         +cariTiket(filter_status : Enumerasi, id_kementerian : Angka, kanal : Enumerasi) : List~TIKET_PESANAN~
         +generateIdTiket(tanggal : Tanggal) : Teks
         +ajukan(judul : Teks, kanal : Enumerasi, jenis : Enumerasi, target : Tanggal, brief : TeksPanjang, rush : Boolean, alasan : TeksPanjang) : void
         +hitungSelisihHari() : Angka
-        +validasiSLA(kanal_tujuan, jenis_konten) : Boolean
-        +setujuiBrief(id_admin : Angka) : void
+        +validasiSLA(kanal_tujuan : Enumerasi, jenis_konten : Enumerasi) : Boolean
+        +setujuiBrief(id_pengguna_admin : Angka, tanggal_verifikasi : TanggalWaktu) : void
         +tolakBrief(catatan : TeksPanjang) : void
-        +tugaskan(id_eksekutor : Angka) : void
+        +tugaskan(id_eksekutor : Angka, waktu_penugasan : TanggalWaktu) : void
         +ubahStatus(status_baru : Enumerasi) : void
         +hitungSisaKuotaRevisi() : Angka
         +tutupTiket(url_postingan : Teks) : void
     }
     class BERKAS_ASET {
         +id_aset : Angka
+        +id_tiket : Teks
         +nama_file : Teks
         +file_path : Teks
         +ukuran_mb : Angka
@@ -750,35 +757,41 @@ classDiagram
     }
     class DRAF_KARYA {
         +id_draf : Angka
+        +id_tiket : Teks
         +versi_draf : Teks
         +file_path_preview : Teks
         +tautan_preview_video : Teks
         +catatan_draf : TeksPanjang
         +tanggal_unggah : TanggalWaktu
         +cariDrafTerakhir(id_tiket : Teks) : DRAF_KARYA
-        +versiBerikutnya() : Teks
-        +unggahDraf(versi : Teks, berkas : Teks, tautan : Teks, catatan : TeksPanjang) : void
+        +versiBerikutnya(id_tiket : Teks) : Teks
+        +unggahDraf(id_tiket : Teks, versi_draf : Teks, file_path_preview : Teks, tautan_preview_video : Teks, catatan_draf : TeksPanjang) : void
     }
     class RIWAYAT_REVISI {
         +id_revisi : Angka
+        +id_tiket : Teks
         +revisi_ke : Angka
         +poin_revisi : TeksPanjang
         +tanggal_pengajuan_revisi : TanggalWaktu
         +catatanRevisiTerakhir(id_tiket : Teks) : TeksPanjang
-        +catatRevisi(poin : TeksPanjang) : Angka
+        +catatRevisi(id_tiket : Teks, poin_revisi : TeksPanjang, revisi_ke : Angka) : Angka
     }
     class PUBLIKASI_KONTEN {
         +id_publikasi : Angka
+        +id_tiket : Teks
+        +id_staf_medsos : Angka
         +url_postingan_medsos : Teks
         +tanggal_terbit : TanggalWaktu
-        +catatPublikasi(id_tiket : Teks, url : Teks, tanggal : TanggalWaktu) : Angka
+        +catatPublikasi(id_tiket : Teks, url_postingan_medsos : Teks, tanggal_terbit : TanggalWaktu) : Angka
     }
     class RIWAYAT_PENUGASAN {
         +id_penugasan : Angka
+        +id_tiket : Teks
+        +id_eksekutor : Angka
         +jenis_penugasan : Enumerasi
         +alasan_mutasi : TeksPanjang
         +waktu_mutasi : TanggalWaktu
-        +catatPenugasan(jenis : Enumerasi, alasan : TeksPanjang) : Angka
+        +catatPenugasan(id_tiket : Teks, id_eksekutor : Angka, jenis_penugasan : Enumerasi, alasan_mutasi : TeksPanjang) : Angka
     }
 
     KEMENTERIAN "1" --> "0..*" PENGGUNA : menaungi
@@ -793,7 +806,7 @@ classDiagram
     PENGGUNA "1" --> "0..*" RIWAYAT_PENUGASAN : diberikan kepada
 ```
 
-Keterangan: `*--` menyatakan **komposisi** (bagian tidak punya arti tanpa tiket induknya: aset, draf, riwayat revisi, dan riwayat penugasan); `-->` menyatakan **asosiasi** biasa. Kunci tamu ERD diwakili asosiasi dan karena itu tidak muncul sebagai atribut kelas, kecuali `id_pengguna`, `id_tiket`, `id_draf`, dan `id_revisi` yang tetap ditulis sebagai pengenal objek. Atribut turunan (`/kuota_revisi_terpakai`, `/selisih_hari`) ditulis sebagai operasi `hitungSisaKuotaRevisi()` dan `hitungSelisihHari()`.
+Keterangan: Relasi antar-kelas diwakili oleh garis komposisi (`*--`) dan asosiasi (`-->`), sementara atribut kunci tamu (FK) seperti `id_kementerian`, `id_pemohon`, `id_eksekutor`, `id_tiket`, dan `id_staf_medsos` tetap dicantumkan secara eksplisit pada kompartemen atribut kelas untuk memudahkan penelusuran langsung ke skema basis data logis pada Bab 4.2. Atribut turunan (`/kuota_revisi_terpakai`, `/selisih_hari`) ditulis sebagai operasi `hitungSisaKuotaRevisi()` dan `hitungSelisihHari()`.
 
 Multiplicity setiap ujung asosiasi pada diagram di atas sama dengan kardinalitas pada Tabel 4.1b. Kelas `KEMENTERIAN`, `PENGGUNA`, `TIKET_PESANAN`, dan sisanya memakai nama serta atribut yang sama dengan entitas dan kamus data Bab 4.2 dan Bab 5.1.
 
@@ -814,14 +827,14 @@ Multiplicity setiap ujung asosiasi pada diagram di atas sama dengan kardinalitas
 
 | Nama Kelas & Stereotype | Tanggung Jawab Utama | Metode Kunci & Kontrak (Pre → Post) | Keterlacakan (SRS dan IC) |
 |---|---|---|---|
-| TIKET_PESANAN `«entity»` (akar komposisi) | Mengelola siklus hidup tiket, memvalidasi perpindahan status, dan menghitung nilai turunan. | • `cariTiket(filter_status, id_kementerian, kanal)` : List~TIKET_PESANAN~ → Pre: pemanggil berperan Admin atau Klien pemilik tiket. Post: daftar tiket yang cocok dengan filter; Klien hanya menerima tiket `id_pemohon` miliknya (NFR-SEC-02, IC-02).<br>• `generateIdTiket(tanggal)` → Pre: tanggal pengajuan valid. Post: nilai `#MED-YYYYMM-XXX` unik terbentuk (IC-01).<br>• `ajukan(...)` → Pre: kanal dan tanggal target terisi; Klien terautentikasi. Post: tiket terbentuk dengan status `Submitted`, `is_rush_order` terisi sesuai IC-07.<br>• `validasiSLA()` → Pre: tanggal_pengajuan ≠ kosong. Post: true bila selisih hari memenuhi batas kanal (BR-01); false memicu kewajiban alasan darurat (IC-07).<br>• `setujuiBrief(id_admin)` → Pre: status = `Submitted`; pemanggil berperan Admin (BR-03). Post: `tanggal_verifikasi` terisi dan status menjadi `Assigned` setelah penugasan (IC-09).<br>• `tolakBrief(catatan)` → Pre: status = `Submitted`; catatan tidak kosong. Post: status ∈ {`Rejected`, `Revision Required`} dan `catatan_penolakan` terisi (IC-09).<br>• `tugaskan(id_eksekutor)` → Pre: status ∈ {`Assigned`, `In Progress`}; eksekutor berperan Eksekutor; beban aktif eksekutor < 3 atau Admin mengonfirmasi override (BR-04). Post: `id_eksekutor` dan `waktu_penugasan` diperbarui, status `Assigned` (IC-08, IC-09).<br>• `ubahStatus(status_baru)` → Pre: transisi termasuk daftar IC-10. Post: `status_tiket` berubah dan aturan bersyarat atribut terkait terpenuhi (IC-04, IC-10).<br>• `hitungSisaKuotaRevisi()` : Angka → Pre: tiket ada. Post: nilai 2 − jumlah baris RIWAYAT_REVISI, tidak disimpan (IC-06).<br>• `hitungSelisihHari()` : Angka → Pre: kedua tanggal terisi. Post: nilai hari dihitung saat itu juga, tidak disimpan (IC-07).<br>• `tutupTiket(url_postingan)` → Pre: status = `Ready to Post`; url tidak kosong. Post: status `Published` dan publikasi tercatat (IC-09, IC-10). | FR-02, FR-03, FR-05, FR-07, FR-08, FR-09, FR-11, FR-12, FR-13, FR-15, BR-01, BR-02, BR-03, BR-04, AC-03, AC-04, AC-08, AC-09, AC-11; IC-01, IC-04, IC-06, IC-07, IC-08, IC-09, IC-10 |
-| PENGGUNA `«entity»` | Menyimpan identitas akun, memeriksa kredensial, dan menghitung beban tugas aktif eksekutor. | • `autentikasi(email, sandi)` : Boolean → Pre: email terdaftar. Post: true bila hash sandi cocok; pemanggilan gagal berulang dibatasi (AC-02); peran menentukan menu yang dirender (IC-04).<br>• `cekPeran()` : Enumerasi → Pre: id_pengguna terdaftar. Post: mengembalikan peran akun yang dipakai controller untuk memilih menu dan menolak akses di luar peran (IC-04).<br>• `daftarEksekutor(spesialisasi)` : List~PENGGUNA~ → Pre: tidak ada. Post: daftar akun berperan Eksekutor beserta spesialisasinya untuk pemilihan penugasan (FR-08).<br>• `hitungTiketAktif()` : Angka → Pre: role = Eksekutor. Post: jumlah tiket berstatus `In Progress` milik akun ini; dipakai memicu peringatan BR-04 (IC-08).<br>• `ubahProfil(nama, no_whatsapp)` → Pre: pengguna terautentikasi. Post: `nama_lengkap` dan `no_whatsapp` diperbarui tanpa mengubah peran (FR-16). | FR-01, FR-08, FR-16, NFR-SEC-01, NFR-SEC-02, BR-04, AC-01, AC-02, AC-10; IC-04, IC-08 |
+| TIKET_PESANAN `«entity»` (akar komposisi) | Mengelola siklus hidup tiket, memvalidasi perpindahan status, dan menghitung nilai turunan. | • `cariTiket(filter_status, id_kementerian, kanal)` : List~TIKET_PESANAN~ → Pre: pemanggil berperan Admin atau Klien pemilik tiket. Post: daftar tiket yang cocok dengan filter; Klien hanya menerima tiket `id_pemohon` miliknya (NFR-SEC-02, IC-02).<br>• `generateIdTiket(tanggal)` → Pre: tanggal pengajuan valid. Post: nilai `#MED-YYYYMM-XXX` unik terbentuk (IC-01).<br>• `ajukan(judul_publikasi, kanal_tujuan, jenis_konten, tanggal_target_tayang, deskripsi_brief, is_rush_order, alasan_darurat)` → Pre: kanal, jenis konten, dan tanggal target terisi; Klien terautentikasi. Post: tiket terbentuk dengan status `Submitted`, `is_rush_order` terisi sesuai IC-07.<br>• `validasiSLA(kanal_tujuan, jenis_konten)` : Boolean → Pre: kanal_tujuan dan jenis_konten terdefinisi; tanggal target terisi. Post: true bila selisih hari memenuhi batas kanal dan jenis konten (BR-01); false memicu kewajiban alasan darurat (IC-07).<br>• `setujuiBrief(id_pengguna_admin, tanggal_verifikasi)` → Pre: status = `Submitted`; pemanggil berperan Admin (BR-03). Post: `tanggal_verifikasi` terisi dan tiket dinyatakan layak untuk masuk ke tahap penugasan eksekutor (IC-09).<br>• `tolakBrief(catatan)` → Pre: status = `Submitted`; catatan tidak kosong. Post: status ∈ {`Rejected`, `Revision Required`} dan `catatan_penolakan` terisi (IC-09).<br>• `tugaskan(id_eksekutor, waktu_penugasan)` → Pre: status ∈ {`Submitted`, `Assigned`, `In Progress`}; eksekutor berperan Eksekutor; beban aktif eksekutor ≤ 3 atau Admin mengonfirmasi override (BR-04). Post: `id_eksekutor` dan `waktu_penugasan` diperbarui, status `Assigned` (IC-08, IC-09).<br>• `ubahStatus(status_baru)` → Pre: transisi termasuk daftar IC-10. Post: `status_tiket` berubah dan aturan bersyarat atribut terkait terpenuhi (IC-04, IC-10).<br>• `hitungSisaKuotaRevisi()` : Angka → Pre: tiket ada. Post: nilai 2 − jumlah baris RIWAYAT_REVISI, tidak disimpan (IC-06).<br>• `hitungSelisihHari()` : Angka → Pre: kedua tanggal terisi. Post: nilai hari dihitung saat itu juga, tidak disimpan (IC-07).<br>• `tutupTiket(url_postingan)` → Pre: status = `Ready to Post`; url tidak kosong. Post: status `Published` dan publikasi tercatat (IC-09, IC-10). | FR-02, FR-03, FR-05, FR-07, FR-08, FR-09, FR-11, FR-12, FR-13, FR-15, BR-01, BR-02, BR-03, BR-04, AC-03, AC-04, AC-08, AC-09, AC-11; IC-01, IC-04, IC-06, IC-07, IC-08, IC-09, IC-10 |
+| PENGGUNA `«entity»` | Menyimpan identitas akun, memeriksa kredensial, dan menghitung beban tugas aktif eksekutor. | • `autentikasi(email, sandi)` : Boolean → Pre: email terdaftar. Post: true bila hash sandi cocok; pemanggilan gagal berulang dibatasi (AC-02); peran menentukan menu yang dirender (IC-04).<br>• `cekPeran(id_pengguna)` : Enumerasi → Pre: id_pengguna terdaftar. Post: mengembalikan peran akun yang dipakai controller untuk memilih menu dan menolak akses di luar peran (IC-04).<br>• `daftarEksekutor(spesialisasi)` : List~PENGGUNA~ → Pre: tidak ada. Post: daftar akun berperan Eksekutor beserta spesialisasinya untuk pemilihan penugasan (FR-08).<br>• `hitungTiketAktif(id_eksekutor)` : Angka → Pre: role = Eksekutor. Post: jumlah tiket aktif dengan status_tiket ∈ {`Assigned`, `In Progress`, `Revision`} milik akun ini; dipakai memicu peringatan BR-04 (IC-08).<br>• `ubahProfil(nama, no_whatsapp)` → Pre: pengguna terautentikasi. Post: `nama_lengkap` dan `no_whatsapp` diperbarui tanpa mengubah peran (FR-16). | FR-01, FR-08, FR-16, NFR-SEC-01, NFR-SEC-02, BR-04, AC-01, AC-02, AC-10; IC-04, IC-08 |
 | KEMENTERIAN `«entity»` | Menyimpan data referensi kementerian dan menyediakan daftar penanggung jawab. | • `daftarPenanggungJawab()` : List~PENGGUNA~ → Pre: kementerian memiliki akun terdaftar. Post: daftar akun Klien milik kementerian tersebut; dipakai memisahkan kepemilikan data antar kementerian (NFR-SEC-02). | SRS §1.2, NFR-SEC-02; IC-02, IC-12 |
 | BERKAS_ASET `«entity»` (bagian dari TIKET_PESANAN) | Menyimpan berkas aset tiket dan menegakkan kebijakan retensi. | • `validasiFormatBerkas(nama, format, ukuran)` : Boolean → Pre: berkas disertakan pengguna. Post: true bila format termasuk daftar IC-03 dan (ukuran ≤ 50 atau `tautan_gdrive` terisi) (IC-05).<br>• `fileBerkas(id_tiket)` : List~BERKAS_ASET~ → Pre: tiket ada. Post: daftar berkas dengan `status_purge = false` untuk diunduh selama produksi (FR-04).<br>• `simpanBerkas(id_tiket, nama, ukuran, tautan)` : Angka → Pre: tiket berstatus belum `Published`. Post: baris aset tersimpan dengan `status_purge = false` dan `id_aset` dikembalikan (IC-02).<br>• `purgeBerkas()` → Pre: status tiket = `Published` (BR-05). Post: `status_purge = true` dan `file_path` dikosongkan, metadata tetap tersimpan (IC-11). | FR-04, FR-15, BR-05, AC-05, AC-18; IC-02, IC-03, IC-05, IC-11 |
-| DRAF_KARYA `«entity»` (bagian dari TIKET_PESANAN) | Menyimpan draf karya per versi dan menentukan nomor versi berikutnya. | • `cariDrafTerakhir(id_tiket)` : DRAF_KARYA → Pre: tiket memiliki minimal satu draf. Post: baris draf dengan `versi_draf` tertinggi agar Klien meninjau versi terbaru (FR-11).<br>• `versiBerikutnya()` : Teks → Pre: tiket memiliki minimal 0 draf. Post: `v1` bila belum ada draf, selain itu nomor tertinggi + 1; nilainya unik per tiket (IC-12).<br>• `unggahDraf(versi, berkas, tautan, catatan)` → Pre: status tiket ∈ {`Assigned`, `In Progress`, `Revision`} dan salah satu dari berkas atau tautan pratinjau terisi. Post: baris draf tersimpan dan status tiket menjadi `Review` (IC-09, IC-10). | FR-10, FR-11, AC-12, AC-13; IC-09, IC-10, IC-12 |
-| RIWAYAT_REVISI `«entity»` (bagian dari TIKET_PESANAN) | Menyimpan catatan revisi minor dan menegakkan kuota revisi. | • `catatanRevisiTerakhir(id_tiket)` : TeksPanjang → Pre: tiket ada. Post: poin revisi terakhir ditampilkan pada dasbor Eksekutor bersama tugasnya (FR-10, FR-12).<br>• `catatRevisi(poin)` : Angka → Pre: status tiket = `Review`; `hitungSisaKuotaRevisi()` > 0 (BR-02). Post: baris revisi tersimpan dengan `revisi_ke` = jumlah baris + 1 dan status tiket menjadi `Revision`. Pre yang gagal: permintaan ditolak dengan pesan batas kuota (IC-06, IC-10). | FR-05, FR-12, BR-02, AC-06, AC-14, AC-15; IC-06, IC-10, IC-12 |
-| PUBLIKASI_KONTEN `«entity»` (bagian dari TIKET_PESANAN) | Mencatat tautan tayang riil dan waktu terbit konten. | • `catatPublikasi(id_tiket, url, tanggal)` : Angka → Pre: status tiket ∈ {`Ready to Post`, `Published`}; url tidak kosong; satu tiket hanya boleh punya satu catatan publikasi. Post: baris publikasi tersimpan dengan `id_staf_medsos` pencatat (IC-09, IC-12). | FR-14, FR-15, AC-17, AC-18; IC-09, IC-12 |
-| RIWAYAT_PENUGASAN `«entity»` (bagian dari TIKET_PESANAN) | Mencatat jejak penugasan awal dan mutasi penanggung jawab tiket. | • `catatPenugasan(jenis, alasan)` : Angka → Pre: tiket memiliki eksekutor yang ditetapkan; `alasan` tidak kosong bila `jenis = mutasi`. Post: baris riwayat tersimpan dengan `waktu_mutasi` terisi sehingga riwayat mutasi tiket dapat ditelusuri (AC-11). | FR-08, FR-09, AC-11; IC-09 |
+| DRAF_KARYA `«entity»` (bagian dari TIKET_PESANAN) | Menyimpan draf karya per versi dan menentukan nomor versi berikutnya. | • `cariDrafTerakhir(id_tiket)` : DRAF_KARYA → Pre: tiket memiliki minimal satu draf. Post: baris draf dengan `versi_draf` tertinggi agar Klien meninjau versi terbaru (FR-11).<br>• `versiBerikutnya(id_tiket)` : Teks → Pre: tiket memiliki minimal 0 draf. Post: `v1` bila belum ada draf, selain itu nomor tertinggi + 1; nilainya unik per tiket (IC-12).<br>• `unggahDraf(id_tiket, versi_draf, file_path_preview, tautan_preview_video, catatan_draf)` → Pre: status tiket ∈ {`Assigned`, `In Progress`, `Revision`} dan salah satu dari berkas atau tautan pratinjau terisi. Post: baris draf tersimpan dan status tiket menjadi `Review` (IC-09, IC-10). | FR-10, FR-11, AC-12, AC-13; IC-09, IC-10, IC-12 |
+| RIWAYAT_REVISI `«entity»` (bagian dari TIKET_PESANAN) | Menyimpan catatan revisi minor dan menegakkan kuota revisi. | • `catatanRevisiTerakhir(id_tiket)` : TeksPanjang → Pre: tiket ada. Post: poin revisi terakhir ditampilkan pada dasbor Eksekutor bersama tugasnya (FR-10, FR-12).<br>• `catatRevisi(id_tiket, poin_revisi, revisi_ke)` : Angka → Pre: status tiket = `Review`; `hitungSisaKuotaRevisi()` > 0 (BR-02). Post: baris revisi tersimpan dengan `revisi_ke` dan status tiket menjadi `Revision`. Pre yang gagal: permintaan ditolak dengan pesan batas kuota (IC-06, IC-10). | FR-05, FR-12, BR-02, AC-06, AC-14, AC-15; IC-06, IC-10, IC-12 |
+| PUBLIKASI_KONTEN `«entity»` (bagian dari TIKET_PESANAN) | Mencatat tautan tayang riil dan waktu terbit konten. | • `catatPublikasi(id_tiket, url_postingan_medsos, tanggal_terbit)` : Angka → Pre: status tiket = `Ready to Post`; url tidak kosong; satu tiket hanya boleh punya satu catatan publikasi. Post: baris publikasi tersimpan dengan `id_staf_medsos` pencatat (IC-09, IC-12). | FR-14, FR-15, AC-17, AC-18; IC-09, IC-12 |
+| RIWAYAT_PENUGASAN `«entity»` (bagian dari TIKET_PESANAN) | Mencatat jejak penugasan awal dan mutasi penanggung jawab tiket. | • `catatPenugasan(id_tiket, id_eksekutor, jenis_penugasan, alasan_mutasi)` : Angka → Pre: tiket memiliki eksekutor yang ditetapkan; `alasan_mutasi` tidak kosong bila `jenis_penugasan = mutasi`. Post: baris riwayat tersimpan dengan `waktu_mutasi` terisi sehingga riwayat mutasi tiket dapat ditelusuri (AC-11). | FR-08, FR-09, AC-11; IC-09 |
 
 Catatan: setiap operasi di atas muncul sebagai pesan pada Bab 3 dan sebaliknya, kecuali tiga operasi milik kebutuhan yang di luar cakupan sequence diagram Tugas 3: `PENGGUNA.autentikasi()` dan `PENGGUNA.ubahProfil()` (FR-01 dan FR-16, dikerjakan pada Pertemuan 12) serta `KEMENTERIAN.daftarPenanggungJawab()` (data referensi yang hanya dipakai sebagai pendukung tampilan), ditambah `TIKET_PESANAN.hitungSelisihHari()` yang merupakan operasi pembantu di dalam `validasiSLA()`. Ketiga operasi tetap dicantumkan pada kelas domain untuk kelengkapan model, tetapi tidak dipakai sebagai pesan pada SD-01 s.d. SD-04. Pesan yang diterima kelas boundary/control (`muatDaftarStaf()`, `simpanTiket()`, dan sejenisnya) tidak dimasukkan ke tabel ini karena bukan perilaku domain.
 
@@ -829,13 +842,13 @@ Catatan: setiap operasi di atas muncul sebagai pesan pada Bab 3 dan sebaliknya, 
 
 # 7. Cross-Model Consistency dan Keterlacakan
 
-## 7.1 Requirements Traceability Matrix (Minggu selanjutnya v1.1)
+## 7.1 Requirements Traceability Matrix (RTM)
 
-Kolom BPMN/Activity bertanda "belum tersedia" mengikuti catatan ketersediaan artefak pada Bab 1.2. Kebutuhan di luar use case yang dimodelkan (FR-01, FR-16) ditandai "di luar cakupan SDD" sesuai batas pada Bab 2.2.
+Seluruh kolom keterlacakan hulu (BPMN, Use Case, Activity Diagram) hingga hilir (Sequence Diagram, ERD/IC, dan Kelas Domain) telah terisi lengkap sesuai baseline v1.1. Kebutuhan di luar use case yang dimodelkan (FR-01, FR-16) ditandai "di luar cakupan SDD" sesuai batas pada Bab 2.2.
 
 | ID Kebutuhan | Deskripsi Kebutuhan | Kriteria (AC) | BPMN & Use Case | Activity Diagram | Sequence Diagram (SDD) | Entitas, Kolom ERD & IC (SDD) | Kelas & Metode Domain (SDD) |
 |---|---|---|---|---|---|---|---|
-| FR-01 | Autentikasi kredensial dan pengarahan ke antarmuka sesuai peran | AC-01, AC-02 | BPMN-01 | AD-00 | di luar cakupan SDD (pesan 3 pada SD-01 hanya memeriksa peran) | PENGGUNA (email, password_hash, role); IC-01, IC-04 | PENGGUNA.autentikasi(), PENGGUNA.hitungTiketAktif() |
+| FR-01 | Autentikasi kredensial dan pengarahan ke antarmuka sesuai peran | AC-01, AC-02 | BPMN-01 | di luar cakupan SDD (Pertemuan 12) | di luar cakupan SDD (pesan 3 pada SD-01 hanya memeriksa peran) | PENGGUNA (email, password_hash, role); IC-01, IC-04 | PENGGUNA.autentikasi(), PENGGUNA.hitungTiketAktif() |
 | FR-02 | Klien membuat tiket baru via formulir multi-kanal | AC-03 | BPMN-01, UC-01 | AD-01 | SD-01 (Pesan 1 s.d. 24) | TIKET_PESANAN (id_tiket, judul_publikasi, kanal_tujuan, jenis_konten, tanggal_target_tayang, deskripsi_brief); IC-01, IC-03 | TIKET_PESANAN.ajukan(), TIKET_PESANAN.generateIdTiket() |
 | FR-03 | Validasi SLA dan penandaan Rush Order dengan justifikasi | AC-04 | BPMN-01, UC-01 | AD-01 | SD-01 (Pesan 6 s.d. 10, guard `alt`) | TIKET_PESANAN (tanggal_target_tayang, tanggal_pengajuan, jenis_konten, is_rush_order, alasan_darurat); IC-07, IC-09 | TIKET_PESANAN.validasiSLA(), TIKET_PESANAN.hitungSelisihHari() |
 | FR-04 | Unggah/unduh aset termasuk video > 50 MB dan auto-purge setelah Published | AC-05 | BPMN-01, UC-01, UC-04 | AD-01 | SD-01 (Pesan 11 s.d. 15), SD-04 (Pesan 22) | BERKAS_ASET (nama_file, file_path, ukuran_mb, format_file, tautan_gdrive, status_purge); IC-03, IC-05, IC-11 | BERKAS_ASET.validasiFormatBerkas(), BERKAS_ASET.simpanBerkas(), BERKAS_ASET.purgeBerkas() |
@@ -886,7 +899,7 @@ Skenario yang ditelusuri: UC-01 (pengajuan tiket) dilanjutkan UC-02 (validasi da
 | 2 | Hitung selisih hari terhadap batas SLA kanal (R) | TIKET_PESANAN.tanggal_pengajuan, TIKET_PESANAN.tanggal_target_tayang, TIKET_PESANAN.kanal_tujuan | Ya | Atribut `/selisih_hari` dan `/kuota_revisi_terpakai` tidak disimpan, dihitung saat dibutuhkan (IC-07). |
 | 3 | Simpan tiket baru beserta penanda darurat (C) | TIKET_PESANAN.status_tiket, TIKET_PESANAN.is_rush_order, TIKET_PESANAN.alasan_darurat | Ya | – |
 | 4 | Simpan berkas aset dan validasi batas 50 MB (C) | BERKAS_ASET.file_path, BERKAS_ASET.ukuran_mb, BERKAS_ASET.tautan_gdrive | Ya | – |
-| 5 | Admin membaca antrean dan beban kerja tiap eksekutor (R) | TIKET_PESANAN.id_eksekutor, TIKET_PESANAN.status_tiket | Ya | Beban kerja dihitung dengan `hitungTiketAktif()`, tidak perlu kolom penghitung (IC-08). |
+| 5 | Admin membaca antrean dan beban kerja tiap eksekutor (R) | TIKET_PESANAN.id_eksekutor, TIKET_PESANAN.status_tiket | Ya | Beban kerja tiket aktif ({Assigned, In Progress, Revision}) dihitung dengan `hitungTiketAktif()`, tidak perlu kolom penghitung (IC-08). |
 | 6 | Catat penugasan awal atau mutasi eksekutor (C) | RIWAYAT_PENUGASAN.jenis_penugasan, RIWAYAT_PENUGASAN.alasan_mutasi, RIWAYAT_PENUGASAN.waktu_mutasi | Ya | Pada SDD v1.0 langkah ini gagal karena belum ada entitas riwayat penugasan sementara AC-11 menuntut riwayat mutasi tercatat → DEF-01; entitas `RIWAYAT_PENUGASAN` ditambahkan pada v1.1. |
 | 7 | Auto-purge berkas setelah tiket Published (U) | BERKAS_ASET.status_purge, BERKAS_ASET.file_path | Ya | `file_path` dikosongkan tetapi `ukuran_mb`, `format_file`, dan `tautan_gdrive` dipertahankan sesuai BR-05 (IC-11). |
 | 8 | Tutup tiket dengan mencatat tautan tayang (C + U) | PUBLIKASI_KONTEN.url_postingan_medsos, PUBLIKASI_KONTEN.tanggal_terbit, TIKET_PESANAN.status_tiket | Ya | – |
@@ -917,7 +930,8 @@ Skenario yang ditelusuri: UC-01 (pengajuan tiket) dilanjutkan UC-02 (validasi da
 | DEF-02 | Pesan `validasiFormatBerkas()` dan `versiBerikutnya()` pada SD-01 dan SD-03 belum ada sebagai operasi pada kelas `BERKAS_ASET` dan `DRAF_KARYA` di v1.0. | SD-01, SD-03 → 6.1, 6.2 | Inkonsistensi | Mandiri (checklist butir 4) | Menambah kedua operasi pada kelas domain beserta kontrak operasinya pada Bab 6.2. | Selesai |
 | DEF-03 | BR-02 pada v1.0 hanya tertulis sebagai batas kuota tanpa ekspresi yang dapat diuji, sehingga belum ada IC yang menegakkannya secara eksplisit. | SRS BR-02 → 5.2 | Kurang | Mandiri (checklist butir 8) | Menambah IC-06 (kuota ≤ 2 dan `revisi_ke` ∈ {1,2}) serta IC-12 (unik gabungan `id_tiket` + `revisi_ke`). | Selesai |
 | DEF-04 | SRS §10.3 mencantumkan 7 nilai status tiket, sedangkan UC-02 membutuhkan status keputusan `Rejected` dan `Revision Required`. | SRS §10.3 → IC-04 | Inkonsistensi | Mandiri | SDD menetapkan 9 nilai status pada IC-04 dan kamus data, lalu mengusulkan SRS v1.1 menyelaraskan daftar status agar kedua dokumen sama; batas waktu dan bukti AC-08 tetap terpenuhi. | Selesai (SDD); diusulkan untuk SRS |
-| DEF-05 | BR-01 mengatur batas H-5 untuk Carousel/LinkedIn, sedangkan FR-02 hanya menyebut Instagram Feeds, Story, LinkedIn, dan TikTok tanpa Carousel. | SRS FR-02 ↔ BR-01 → IC-03 | Inkonsistensi | Mandiri | Kanal `Instagram Carousel` ditetapkan sebagai nilai kelima `kanal_tujuan` pada IC-03 dan kamus data; usulan penyelarasan FR-02 disampaikan pada revisi SRS. | Selesai (SDD); diusulkan untuk SRS |
+| DEF-05 | BR-01 mengatur batas H-5 untuk Carousel/LinkedIn, sedangkan FR-02 hanya menyebut 4 kanal resmi tanpa pemisahan jenis konten Carousel. | SRS FR-02 ↔ BR-01 → IC-03 | Inkonsistensi | Mandiri | Kanal diselaraskan menjadi 4 kanal resmi ({Instagram Feeds, Instagram Story, LinkedIn, TikTok}) dan ditambah atribut `jenis_konten` {Poster, Carousel, Video, Siaran Pers} pada ERD, kamus data, IC-03, IC-07, dan kelas domain. | Selesai |
+| DEF-09 | Ketidaksesuaian daftar parameter operasi antara Sequence Diagram (Bab 3) dan Kontrak Operasi (Bab 6.2), kontradiksi keterangan atribut FK pada Bab 6.1, celah status aktif pada IC-08, serta sisa teks draf v1.0 pada Bab 7.1 dan Lampiran B. | Bab 3 ↔ 6.2, Bab 6.1, 5.2 ↔ 6.2, Bab 7.1, Lampiran B | Inkonsistensi & Kelengkapan | Mandiri (Audit Lanjutan v1.1) | Menyamakan seluruh parameter operasi di Bab 6.2 dengan pesan di Bab 3, merevisi keterangan Gambar 6.1, memperluas status beban aktif IC-08 menjadi {Assigned, In Progress, Revision}, dan membersihkan sisa teks v1.0. | Selesai |
 | DEF-06 | [ISI SAAT PEER REVIEW: nomor checklist 7.4 yang diuji] | [Sumber → Tujuan] | [Jenis] | Peer review: [nama kelompok] | [Tindakan] | [Terbuka / Ditolak + alasan] |
 | DEF-07 | [ISI SAAT PEER REVIEW: nomor checklist 7.4 yang diuji] | [Sumber → Tujuan] | [Jenis] | Peer review: [nama kelompok] | [Tindakan] | [Terbuka / Ditolak + alasan] |
 | DEF-08 | [ISI SAAT PEER REVIEW: nomor checklist 7.4 yang diuji] | [Sumber → Tujuan] | [Jenis] | Peer review: [nama kelompok] | [Tindakan] | [Terbuka / Ditolak + alasan] |
@@ -941,16 +955,17 @@ Skenario yang ditelusuri: UC-01 (pengajuan tiket) dilanjutkan UC-02 (validasi da
 | 11 | Menyetel ulang enumerasi kanal menjadi 4 kanal resmi (Instagram Feeds, Story, LinkedIn, TikTok) dan menambah atribut `jenis_konten` {Poster, Carousel, Video, Siaran Pers} sebagai penentu batas SLA bersama kanal. | Bukti PC-01 §1.0 dan W06; menutup DEF-05 | ERD logis 4.2, kamus data 5.1.3, IC-03, IC-07, kelas `TIKET_PESANAN` 6.1, SD-01 pesan 5–7 dan 20, RTM 7.1 | v1.1 |
 | 12 | Menambah daftar skenario (Bab 3.1), Lampiran B (pembagian kontribusi), dan Lampiran C (sumber diagram dan repository) mengikuti isi minimal RTM Tugas 3. | Ketentuan isi minimal RTM Tugas 3 | Bab 3.1, Lampiran B, Lampiran C | v1.1 |
 | 13 | Menambah artefak hulu yang tersedia ke tabel 1.2: PC-01 Project Charter, EL-01 Dokumen Hasil Wawancara, dan ERD-P10; catatan ketersediaan BPMN/UCD/AD dipertegas. | Checklist butir 1; audit keterlacakan hulu | Bab 1.2, RTM 7.1 | v1.1 |
-| 14 | Menyediakan artefak hulu yang sebelumnya berstatus belum tersedia: BPMN-01 (proses to-be lintas swimlane), UCD-01 (use case diagram), dan AD-01..AD-04 (activity diagram per use case). | Bab 1.2, Bab 7.1, Lampiran D | BPMN-01, UCD-01, AD-01..AD-04 (berkas sumber: `diagrams_upstream/`, format Draw.io XML, SVG, PNG) |
-| 15 | Memperbarui catatan ketersediaan artefak dan kolom BPMN & Use Case serta Activity Diagram pada RTM sehingga seluruh rantai keterlacakan terisi. | Bab 1.2, Bab 7.1 | RTM v1.1 (semua baris FR/NFR/BR) |
+| 14 | Menyediakan artefak hulu yang sebelumnya berstatus belum tersedia: BPMN-01 (proses to-be lintas swimlane), UCD-01 (use case diagram), dan AD-01..AD-04 (activity diagram per use case). | Bab 1.2, Bab 7.1, Lampiran D | BPMN-01, UCD-01, AD-01..AD-04 (berkas sumber: `diagrams_upstream/`, format Draw.io XML, SVG, PNG) | v1.1 |
+| 15 | Memperbarui catatan ketersediaan artefak dan kolom BPMN & Use Case serta Activity Diagram pada RTM sehingga seluruh rantai keterlacakan terisi. | Bab 1.2, Bab 7.1 | RTM v1.1 (semua baris FR/NFR/BR) | v1.1 |
+| 16 | Penyelarasan parameter operasi Bab 6.2 dengan Sequence Diagram Bab 3, koreksi keterangan atribut FK pada Gambar 6.1, perluasan status beban aktif IC-08 ({Assigned, In Progress, Revision}), pembersihan sisa teks v1.0 pada Bab 7.1 dan Lampiran B, serta koreksi 5 swimlane BPMN-01. | DEF-09; Audit kelengkapan akhir v1.1 | Bab 5.2, Bab 6.1, Bab 6.2, Bab 7.1, Bab 7.3, Bab 7.5, Lampiran B, Lampiran D.1 | v1.1 |
 
 ---
 
 # Lampiran B. Pembagian Kontribusi Anggota Tim
 
-Pembagian berikut mengikuti peran pada SRS Lampiran B dan dipetakan ke artefak SDD yang dikerjakan pada tahap v1.0. Sesuaikan bila ada pergeseran tugas antar-anggota.
+Pembagian berikut mengikuti peran pada SRS Lampiran B dan dipetakan ke artefak SDD yang dikerjakan pada tahap v1.0 dan v1.1.
 
-| NIM | Nama | Peran | Kontribusi pada SDD v1.0 |
+| NIM | Nama | Peran | Kontribusi pada SDD v1.0 & v1.1 |
 |---|---|---|---|
 | H1D025052 | Timotius Willy Narendra | Project Manager | Menetapkan batas ruang lingkup SDD (Bab 1.3), menyelaraskan Bab 1–2 dengan Project Charter dan SRS, memimpin konsolidasi dokumen serta peninjauan akhir. |
 | H1D025067 | Fardizza Vinda Rahman | Analis Sistem | Menyusun katalog use case (Bab 2.2), tabel spesifikasi skenario interaksi (Tabel 3.2–3.5), dan kamus data per entitas (Bab 5.1). |
@@ -980,7 +995,7 @@ Artefak pada lampiran ini adalah baseline hulu yang dirujuk Bab 1.2 dan kolom ke
 
 ![D.1 BPMN To-Be proses pemesanan konten lintas swimlane Klien, Admin, Eksekutor, dan Staf Publikasi](diagrams_upstream/bpmn01.png)
 
-Empat lane aktor ditambah data store. Gateway yang dimodelkan: kepatuhan SLA (BR-01), kelayakan brief (FR-07), batas beban aktif ≤ 3 tiket (BR-04), dan kuota revisi (BR-02). Alur berakhir pada status `Published` dengan auto-purge berkas fisik (BR-05).
+Lima swimlane proses/aktor (Klien, Admin, Eksekutor, Tinjauan Klien, dan Staf Medsos) ditambah satu data store. Gateway yang dimodelkan: kepatuhan SLA (BR-01), kelayakan brief (FR-07), batas beban aktif ≤ 3 tiket (BR-04), dan kuota revisi (BR-02). Alur berakhir pada status `Published` dengan auto-purge berkas fisik (BR-05).
 
 ## D.2 UCD-01: Use Case Diagram
 
