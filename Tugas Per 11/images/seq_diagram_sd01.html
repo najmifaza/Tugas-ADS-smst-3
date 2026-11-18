@@ -1,0 +1,169 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0;padding:0;background:#fff;}svg{display:block;}</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 920" width="950" height="920">
+  <defs>
+    <style>
+
+      .title { font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .head { fill: #D9D9D9; stroke: #000000; stroke-width: 1.5; }
+      .head-name { font-family: 'Times New Roman', serif; font-size: 15px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .head-type { font-family: 'Times New Roman', serif; font-size: 11px; font-style: italic; fill: #333333; text-anchor: middle; }
+      .cell-border { stroke: #C9CDD2; stroke-width: 0.9; }
+      .lifeline { stroke: #000000; stroke-width: 1.1; stroke-dasharray: 6 5; }
+      .activation { fill: #FFFFFF; stroke: #000000; stroke-width: 1.2; }
+      .msg-call { stroke: #000000; stroke-width: 1.6; }
+      .msg-return { stroke: #000000; stroke-width: 1.3; stroke-dasharray: 7 5; }
+      .arrow { fill: #000000; stroke: none; }
+      .arrow-open { fill: #FFFFFF; stroke: #000000; stroke-width: 1.2; }
+      .msg-bg { fill: #FFFFFF; }
+      .msg-text { font-family: 'Times New Roman', serif; font-size: 14px; fill: #000000; text-anchor: middle; }
+      .frag-alt { fill: none; stroke: #000000; stroke-width: 1.3; }
+      .frag-opt { fill: none; stroke: #000000; stroke-width: 1.3; stroke-dasharray: 4 3; }
+      .frag-tab { fill: #FFFFFF; stroke: #000000; stroke-width: 1.3; }
+      .frag-else { stroke: #000000; stroke-width: 1.2; stroke-dasharray: 4 3; }
+      .frag-tag { font-family: 'Times New Roman', serif; font-size: 13px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .frag-cond { font-family: 'Times New Roman', serif; font-size: 13px; font-style: italic; fill: #000000; }
+
+    </style>
+  </defs>
+  <rect width="950" height="920" fill="#FFFFFF"/>
+  <line x1="83" y1="60" x2="83" y2="890" class="lifeline"/>
+  <line x1="239" y1="60" x2="239" y2="890" class="lifeline"/>
+  <line x1="396" y1="60" x2="396" y2="890" class="lifeline"/>
+  <line x1="553" y1="60" x2="553" y2="890" class="lifeline"/>
+  <line x1="710" y1="60" x2="710" y2="890" class="lifeline"/>
+  <line x1="867" y1="60" x2="867" y2="890" class="lifeline"/>
+  <rect x="546" y="140" width="14" height="30" class="activation"/>
+  <rect x="703" y="260" width="14" height="30" class="activation"/>
+  <rect x="860" y="480" width="14" height="30" class="activation"/>
+  <rect x="703" y="670" width="14" height="30" class="activation"/>
+  <rect x="860" y="760" width="14" height="30" class="activation"/>
+  <rect x="43" y="310" width="864" height="110" class="frag-opt"/>
+  <rect x="43" y="310" width="52" height="20" class="frag-tab"/>
+  <text x="69" y="325" class="frag-tag">opt</text>
+  <text x="105" y="325" class="frag-cond">[selisih_hari < batas hari kanal (BR-01)]</text>
+  <rect x="43" y="530" width="864" height="80" class="frag-opt"/>
+  <rect x="43" y="530" width="52" height="20" class="frag-tab"/>
+  <text x="69" y="545" class="frag-tag">opt</text>
+  <text x="105" y="545" class="frag-cond">[format berkas tidak didukung]</text>
+  <line x1="83" y1="80" x2="239" y2="80" class="msg-call"/>
+  <path d="M 239 80 L 230 76 L 230 84 Z" class="arrow"/>
+  <rect x="89" y="60" width="145" height="16" class="msg-bg"/>
+  <text x="161" y="72" class="msg-text">bukaFormPemesanan()</text>
+  <line x1="239" y1="110" x2="396" y2="110" class="msg-call"/>
+  <path d="M 396 110 L 387 106 L 387 114 Z" class="arrow"/>
+  <rect x="217" y="90" width="201" height="16" class="msg-bg"/>
+  <text x="317" y="102" class="msg-text">mulaiPengajuan(id_pengguna)</text>
+  <line x1="396" y1="140" x2="553" y2="140" class="msg-call"/>
+  <path d="M 553 140 L 544 136 L 544 144 Z" class="arrow"/>
+  <rect x="395" y="120" width="159" height="16" class="msg-bg"/>
+  <text x="474" y="132" class="msg-text">cekPeran(id_pengguna)</text>
+  <line x1="553" y1="170" x2="396" y2="170" class="msg-return"/>
+  <path d="M 396 170 L 405 166 L 405 174 Z" class="arrow-open"/>
+  <rect x="419" y="150" width="110" height="16" class="msg-bg"/>
+  <text x="474" y="162" class="msg-text">role = &quot;Klien&quot;</text>
+  <line x1="83" y1="200" x2="239" y2="200" class="msg-call"/>
+  <path d="M 239 200 L 230 196 L 230 204 Z" class="arrow"/>
+  <rect x="6" y="180" width="544" height="16" class="msg-bg"/>
+  <text x="278" y="192" class="msg-text">isiBrief(kanal_tujuan, jenis_konten, tanggal_target_tayang, deskripsi_brief)</text>
+  <line x1="239" y1="230" x2="396" y2="230" class="msg-call"/>
+  <path d="M 396 230 L 387 226 L 387 234 Z" class="arrow"/>
+  <rect x="98" y="210" width="439" height="16" class="msg-bg"/>
+  <text x="317" y="222" class="msg-text">periksaSLA(kanal_tujuan, jenis_konten, tanggal_target_tayang)</text>
+  <line x1="396" y1="260" x2="710" y2="260" class="msg-call"/>
+  <path d="M 710 260 L 701 256 L 701 264 Z" class="arrow"/>
+  <rect x="411" y="240" width="285" height="16" class="msg-bg"/>
+  <text x="553" y="252" class="msg-text">validasiSLA(kanal_tujuan, jenis_konten)</text>
+  <line x1="710" y1="290" x2="396" y2="290" class="msg-return"/>
+  <path d="M 396 290 L 405 286 L 405 294 Z" class="arrow-open"/>
+  <rect x="453" y="270" width="201" height="16" class="msg-bg"/>
+  <text x="553" y="282" class="msg-text">is_rush_order, selisih_hari</text>
+  <line x1="396" y1="354" x2="239" y2="354" class="msg-return"/>
+  <path d="M 239 354 L 248 350 L 248 358 Z" class="arrow-open"/>
+  <rect x="241" y="334" width="152" height="16" class="msg-bg"/>
+  <text x="317" y="346" class="msg-text">mintaAlasanDarurat()</text>
+  <line x1="83" y1="384" x2="239" y2="384" class="msg-call"/>
+  <path d="M 239 384 L 230 380 L 230 388 Z" class="arrow"/>
+  <rect x="78" y="364" width="166" height="16" class="msg-bg"/>
+  <text x="161" y="376" class="msg-text">isiAlasanDarurat(teks)</text>
+  <line x1="83" y1="420" x2="239" y2="420" class="msg-call"/>
+  <path d="M 239 420 L 230 416 L 230 424 Z" class="arrow"/>
+  <rect x="40" y="400" width="243" height="16" class="msg-bg"/>
+  <text x="161" y="412" class="msg-text">unggahAset(berkas, tautan_gdrive)</text>
+  <line x1="239" y1="450" x2="396" y2="450" class="msg-call"/>
+  <path d="M 396 450 L 387 446 L 387 454 Z" class="arrow"/>
+  <rect x="143" y="430" width="348" height="16" class="msg-bg"/>
+  <text x="317" y="442" class="msg-text">periksaBerkas(nama_file, format_file, ukuran_mb)</text>
+  <line x1="396" y1="480" x2="867" y2="480" class="msg-call"/>
+  <path d="M 867 480 L 858 476 L 858 484 Z" class="arrow"/>
+  <rect x="433" y="460" width="397" height="16" class="msg-bg"/>
+  <text x="631" y="472" class="msg-text">validasiFormatBerkas(nama_file, format_file, ukuran_mb)</text>
+  <line x1="867" y1="510" x2="396" y2="510" class="msg-return"/>
+  <path d="M 396 510 L 405 506 L 405 514 Z" class="arrow-open"/>
+  <rect x="576" y="490" width="110" height="16" class="msg-bg"/>
+  <text x="631" y="502" class="msg-text">hasil_validasi</text>
+  <line x1="396" y1="574" x2="239" y2="574" class="msg-return"/>
+  <path d="M 239 574 L 248 570 L 248 578 Z" class="arrow-open"/>
+  <rect x="150" y="554" width="334" height="16" class="msg-bg"/>
+  <text x="317" y="566" class="msg-text">tampilkanGalat(&quot;Format berkas tidak didukung&quot;)</text>
+  <line x1="83" y1="610" x2="239" y2="610" class="msg-call"/>
+  <path d="M 239 610 L 230 606 L 230 614 Z" class="arrow"/>
+  <rect x="96" y="590" width="131" height="16" class="msg-bg"/>
+  <text x="161" y="602" class="msg-text">kirimPermohonan()</text>
+  <line x1="239" y1="640" x2="396" y2="640" class="msg-call"/>
+  <path d="M 396 640 L 387 636 L 387 644 Z" class="arrow"/>
+  <rect x="231" y="620" width="173" height="16" class="msg-bg"/>
+  <text x="317" y="632" class="msg-text">simpanTiket(data_tiket)</text>
+  <line x1="396" y1="670" x2="710" y2="670" class="msg-call"/>
+  <path d="M 710 670 L 701 666 L 701 674 Z" class="arrow"/>
+  <rect x="428" y="650" width="250" height="16" class="msg-bg"/>
+  <text x="553" y="662" class="msg-text">generateIdTiket(tanggal_pengajuan)</text>
+  <line x1="710" y1="700" x2="396" y2="700" class="msg-return"/>
+  <path d="M 396 700 L 405 696 L 405 704 Z" class="arrow-open"/>
+  <rect x="449" y="680" width="208" height="16" class="msg-bg"/>
+  <text x="553" y="692" class="msg-text">id_tiket (&quot;#MED-YYYYMM-XXX&quot;)</text>
+  <line x1="396" y1="730" x2="710" y2="730" class="msg-call"/>
+  <path d="M 710 730 L 701 726 L 701 734 Z" class="arrow"/>
+  <rect x="169" y="710" width="768" height="16" class="msg-bg"/>
+  <text x="553" y="722" class="msg-text">ajukan(judul_publikasi, kanal_tujuan, tanggal_target_tayang, deskripsi_brief, is_rush_order, alasan_darurat)</text>
+  <line x1="396" y1="760" x2="867" y2="760" class="msg-call"/>
+  <path d="M 867 760 L 858 756 L 858 764 Z" class="arrow"/>
+  <rect x="419" y="740" width="425" height="16" class="msg-bg"/>
+  <text x="631" y="752" class="msg-text">simpanBerkas(id_tiket, nama_file, ukuran_mb, tautan_gdrive)</text>
+  <line x1="867" y1="790" x2="396" y2="790" class="msg-return"/>
+  <path d="M 396 790 L 405 786 L 405 794 Z" class="arrow-open"/>
+  <rect x="601" y="770" width="61" height="16" class="msg-bg"/>
+  <text x="631" y="782" class="msg-text">id_aset</text>
+  <line x1="396" y1="820" x2="239" y2="820" class="msg-return"/>
+  <path d="M 239 820 L 248 816 L 248 824 Z" class="arrow-open"/>
+  <rect x="119" y="800" width="397" height="16" class="msg-bg"/>
+  <text x="317" y="812" class="msg-text">konfirmasiPengajuan(id_tiket, status_tiket=&quot;Submitted&quot;)</text>
+  <line x1="239" y1="850" x2="83" y2="850" class="msg-return"/>
+  <path d="M 83 850 L 92 846 L 92 854 Z" class="arrow-open"/>
+  <rect x="64" y="830" width="194" height="16" class="msg-bg"/>
+  <text x="161" y="842" class="msg-text">tampilkanIdTiket(id_tiket)</text>
+  <rect x="8" y="16" width="150" height="44" class="head"/>
+  <text x="83" y="33" class="head-name">K</text>
+  <line x1="8" y1="44" x2="158" y2="44" class="cell-border"/>
+  <text x="83" y="55" class="head-type">lifeline</text>
+  <rect x="164" y="16" width="150" height="44" class="head"/>
+  <text x="239" y="33" class="head-name">UI</text>
+  <line x1="164" y1="44" x2="314" y2="44" class="cell-border"/>
+  <text x="239" y="55" class="head-type">lifeline</text>
+  <rect x="321" y="16" width="150" height="44" class="head"/>
+  <text x="396" y="33" class="head-name">C</text>
+  <line x1="321" y1="44" x2="471" y2="44" class="cell-border"/>
+  <text x="396" y="55" class="head-type">lifeline</text>
+  <rect x="478" y="16" width="150" height="44" class="head"/>
+  <text x="553" y="33" class="head-name">U</text>
+  <line x1="478" y1="44" x2="628" y2="44" class="cell-border"/>
+  <text x="553" y="55" class="head-type">lifeline</text>
+  <rect x="635" y="16" width="150" height="44" class="head"/>
+  <text x="710" y="33" class="head-name">T</text>
+  <line x1="635" y1="44" x2="785" y2="44" class="cell-border"/>
+  <text x="710" y="55" class="head-type">lifeline</text>
+  <rect x="792" y="16" width="150" height="44" class="head"/>
+  <text x="867" y="33" class="head-name">A</text>
+  <line x1="792" y1="44" x2="942" y2="44" class="cell-border"/>
+  <text x="867" y="55" class="head-type">lifeline</text>
+</svg>
+</body></html>

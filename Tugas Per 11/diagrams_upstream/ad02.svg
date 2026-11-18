@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" width="980" height="620">
+  <defs>
+    <style>
+.pool { fill: #FFFFFF; stroke: #000000; stroke-width: 1.4; }
+      .lane-head { fill: #E8E8E8; stroke: #000000; stroke-width: 1.4; }
+      .lane-name { font-family: 'Times New Roman', serif; font-size: 14px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .bpmn-task { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .act-node { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .gw { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .gw-text { font-family: 'Times New Roman', serif; font-size: 14px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .ev-start { fill: #FFFFFF; stroke: #000000; stroke-width: 1.8; }
+      .ev-end { fill: #FFFFFF; stroke: #000000; stroke-width: 2.6; }
+      .ev-inner { fill: #000000; stroke: none; }
+      .store { fill: #FBFBFB; stroke: #000000; stroke-width: 1.5; }
+      .store-title { font-family: 'Times New Roman', serif; font-size: 14px; font-weight: bold; fill: #000000; }
+      .store-text { font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; fill: #000000; }
+      .task-text { font-family: 'Times New Roman', serif; font-size: 14px; fill: #000000; text-anchor: middle; }
+      .actor { fill: #FFFFFF; stroke: #000000; stroke-width: 1.6; }
+      .actor-name { font-family: 'Times New Roman', serif; font-size: 15px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .uc { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .boundary { fill: #FCFCFC; stroke: #000000; stroke-width: 1.6; }
+      .boundary-name { font-family: 'Times New Roman', serif; font-size: 15px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .flow { fill: none; stroke: #000000; stroke-width: 1.6; }
+      .flow-dashed { fill: none; stroke: #000000; stroke-width: 1.4; stroke-dasharray: 7 5; }
+      .arrow { fill: #000000; stroke: none; }
+      .arrow-open { fill: #FFFFFF; stroke: #000000; stroke-width: 1.2; }
+      .label-bg { fill: #FFFFFF; }
+      .flow-label { font-family: 'Times New Roman', serif; font-size: 13px; font-style: italic; fill: #000000; text-anchor: middle; }
+      .note { fill: #FFFFFF; stroke: #000000; stroke-width: 1.1; }
+      .note-text { font-family: 'Times New Roman', serif; font-size: 12px; fill: #000000; }
+    </style>
+  </defs>
+  <rect width="980" height="620" fill="#FFFFFF"/>
+  <rect x="20" y="30" width="930" height="150" class="pool"/>
+  <rect x="20" y="30" width="185" height="150" class="lane-head"/>
+  <text x="112.5" y="110.0" class="lane-name">Admin</text>
+  <rect x="20" y="180" width="930" height="150" class="pool"/>
+  <rect x="20" y="180" width="185" height="150" class="lane-head"/>
+  <text x="112.5" y="260.0" class="lane-name">Controller</text>
+  <rect x="20" y="330" width="930" height="150" class="pool"/>
+  <rect x="20" y="330" width="185" height="150" class="lane-head"/>
+  <text x="112.5" y="410.0" class="lane-name">TIKET_PESANAN</text>
+  <circle cx="221" cy="105" r="18" class="ev-start"/>
+  <rect x="250" y="76" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="337.5" y="102.5" class="task-text">Periksa brief</text>
+  <text x="337.5" y="117.5" class="task-text">dan aset</text>
+  <path d="M 512.0 66 L 554 108.0 L 512.0 150 L 470 108.0 Z" class="gw"/>
+  <text x="512.0" y="113.0" class="gw-text">layak?</text>
+  <rect x="650" y="76" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="737.5" y="102.5" class="task-text">Tolak / minta</text>
+  <text x="737.5" y="117.5" class="task-text">revisi brief</text>
+  <rect x="250" y="226" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="337.5" y="252.5" class="task-text">Muat daftar eksekutor</text>
+  <text x="337.5" y="267.5" class="task-text">+ beban aktif</text>
+  <path d="M 512.0 216 L 554 258.0 L 512.0 300 L 470 258.0 Z" class="gw"/>
+  <text x="512.0" y="263.0" class="gw-text">≤ 3?</text>
+  <rect x="650" y="226" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="737.5" y="252.5" class="task-text">Konfirmasi</text>
+  <text x="737.5" y="267.5" class="task-text">override manajerial</text>
+  <rect x="250" y="376" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="337.5" y="402.5" class="task-text">Tugaskan tiket</text>
+  <text x="337.5" y="417.5" class="task-text">(status Assigned)</text>
+  <rect x="440" y="376" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="527.5" y="402.5" class="task-text" style="font-size:12.1px">Catat RIWAYAT_PENUGASAN</text>
+  <text x="527.5" y="417.5" class="task-text" style="font-size:12.1px">(jenis = awal / mutasi)</text>
+  <circle cx="898" cy="394" r="18" class="ev-end"/>
+  <circle cx="898" cy="394" r="12" class="ev-inner"/>
+  <path d="M 239 105 L 250 105" class="flow"/>
+  <path d="M 250 105 L 239 110 L 239 100 Z" class="arrow"/>
+  <path d="M 425 105 L 470 105 L 470 108" class="flow"/>
+  <path d="M 470 108 L 465 97 L 475 97 Z" class="arrow"/>
+  <rect x="385.5" y="42.0" width="124" height="17" class="label-bg"/>
+  <text x="447.5" y="55.0" class="flow-label">antrean Submitted</text>
+  <path d="M 554 108 L 650 108 L 650 105" class="flow"/>
+  <path d="M 650 105 L 655 116 L 645 116 Z" class="arrow"/>
+  <rect x="580.5" y="83.0" width="43" height="17" class="label-bg"/>
+  <text x="602.0" y="96.0" class="flow-label">tidak</text>
+  <path d="M 738 134 L 738 158 L 338 158 L 338 134" class="flow-dashed"/>
+  <path d="M 338 134 L 342 145 L 332 145 Z" class="arrow-open"/>
+  <rect x="458.5" y="153.0" width="158" height="17" class="label-bg"/>
+  <text x="537.5" y="166.0" class="flow-label">brief diperbaiki Klien</text>
+  <path d="M 470 108 L 340 108 L 340 255 L 425 255" class="flow"/>
+  <path d="M 425 255 L 414 260 L 414 250 Z" class="arrow"/>
+  <rect x="312.5" y="191" width="23" height="17" class="label-bg"/>
+  <text x="324.0" y="204" class="flow-label">ya</text>
+  <path d="M 425 255 L 470 255 L 470 258" class="flow"/>
+  <path d="M 470 258 L 465 247 L 475 247 Z" class="arrow"/>
+  <rect x="402.0" y="192.0" width="91" height="17" class="label-bg"/>
+  <text x="447.5" y="205.0" class="flow-label">hitung beban</text>
+  <path d="M 554 258 L 650 258 L 650 255" class="flow"/>
+  <path d="M 650 255 L 655 266 L 645 266 Z" class="arrow"/>
+  <rect x="580.5" y="233.0" width="43" height="17" class="label-bg"/>
+  <text x="602.0" y="246.0" class="flow-label">tidak</text>
+  <path d="M 650 255 L 740 255 L 740 405 L 425 405" class="flow"/>
+  <path d="M 425 405 L 436 400 L 436 410 Z" class="arrow"/>
+  <rect x="517.0" y="342.0" width="131" height="17" class="label-bg"/>
+  <text x="582.5" y="355.0" class="flow-label">override disetujui</text>
+  <path d="M 470 258 L 340 258 L 340 405 L 425 405" class="flow"/>
+  <path d="M 425 405 L 414 410 L 414 400 Z" class="arrow"/>
+  <rect x="312.5" y="341" width="23" height="17" class="label-bg"/>
+  <text x="324.0" y="354" class="flow-label">ya</text>
+  <path d="M 425 405 L 440 405" class="flow"/>
+  <path d="M 440 405 L 429 410 L 429 400 Z" class="arrow"/>
+  <rect x="384.0" y="342.0" width="97" height="17" class="label-bg"/>
+  <text x="432.5" y="355.0" class="flow-label">23 tugaskan()</text>
+  <path d="M 615 405 L 880 405 L 880 394" class="flow"/>
+  <path d="M 880 394 L 885 405 L 875 405 Z" class="arrow"/>
+  <rect x="665.0" y="380.0" width="165" height="17" class="label-bg"/>
+  <text x="747.5" y="393.0" class="flow-label">status Assigned (BR-03)</text>
+  <rect x="30" y="558" width="920" height="36" class="note"/>
+  <text x="42" y="578" class="note-text">Turunan dari narasi UC-02 (SRS §6.2) dan SD-02. Gate BR-03 (otoritas Admin) dan BR-04 (beban ≤ 3 tiket aktif).</text>
+</svg>

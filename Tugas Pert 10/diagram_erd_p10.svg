@@ -1,0 +1,311 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1344" width="960" height="1344">
+  <defs>
+    <style>
+      .entity-title { font-family: 'Times New Roman', serif; font-size: 17px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .header-box { fill: #D9D9D9; stroke: #000000; stroke-width: 1.6; }
+      .body-box { fill: #FFFFFF; stroke: #000000; stroke-width: 1.6; }
+      .cell-border { stroke: #D1D5DB; stroke-width: 0.9; }
+      .t-type { font-family: 'Times New Roman', serif; font-size: 13px; font-style: italic; fill: #4B5563; }
+      .t-name { font-family: 'Consolas', 'Courier New', monospace; font-size: 15px; fill: #000000; }
+      .t-pk { font-family: 'Times New Roman', serif; font-size: 13px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .t-fk { font-family: 'Times New Roman', serif; font-size: 13px; font-weight: bold; fill: #1F2937; text-anchor: middle; }
+      .t-desc { font-family: 'Times New Roman', serif; font-size: 13px; fill: #4B5563; }
+      .rel-line { stroke: #000000; stroke-width: 1.7; fill: none; }
+      .rel-label { font-family: 'Times New Roman', serif; font-size: 13px; font-style: italic; fill: #000000; text-anchor: middle; }
+      .pill { fill: #FFFFFF; stroke: none; }
+      .crow { stroke: #000000; stroke-width: 1.7; fill: none; stroke-linecap: round; }
+      .symbol { stroke: #000000; stroke-width: 1.7; fill: #FFFFFF; }
+    </style>
+  </defs>
+
+  <rect width="960" height="1344" fill="#FFFFFF"/>
+
+  <!-- ================= RELASI ================= -->
+  <path d="M 230 166 L 230 236" class="rel-line"/>
+  <line x1="222" y1="172" x2="238" y2="172" class="rel-line"/>
+  <line x1="222" y1="178" x2="238" y2="178" class="rel-line"/>
+  <circle cx="230" cy="223" r="4.5" class="symbol"/>
+  <path d="M 222 236 L 230 227 L 238 236" class="crow"/>
+  <rect x="201" y="193" width="58" height="22" class="pill"/>
+  <text x="230" y="208" class="rel-label">menaungi</text>
+  <path d="M 150 512 L 150 622" class="rel-line"/>
+  <line x1="142" y1="518" x2="158" y2="518" class="rel-line"/>
+  <line x1="142" y1="524" x2="158" y2="524" class="rel-line"/>
+  <circle cx="150" cy="609" r="4.5" class="symbol"/>
+  <path d="M 142 622 L 150 613 L 158 622" class="crow"/>
+  <rect x="114" y="556" width="72" height="22" class="pill"/>
+  <text x="150" y="571" class="rel-label">mengajukan</text>
+  <path d="M 310 512 L 310 622" class="rel-line"/>
+  <line x1="302" y1="530" x2="318" y2="530" class="rel-line"/>
+  <circle cx="310" cy="522" r="4.5" class="symbol"/>
+  <path d="M 302 530 L 310 522 L 318 530" class="crow"/>
+  <circle cx="310" cy="609" r="4.5" class="symbol"/>
+  <path d="M 302 622 L 310 613 L 318 622" class="crow"/>
+  <rect x="271" y="556" width="78" height="22" class="pill"/>
+  <text x="310" y="571" class="rel-label">mengerjakan</text>
+  <path d="M 440 660 L 470 660 L 470 374 L 520 374" class="rel-line"/>
+  <line x1="446" y1="652" x2="446" y2="668" class="rel-line"/>
+  <line x1="452" y1="652" x2="452" y2="668" class="rel-line"/>
+  <circle cx="506" cy="374" r="4.5" class="symbol"/>
+  <path d="M 508 366 L 520 374 L 508 382" class="crow"/>
+  <rect x="441" y="419" width="58" height="22" class="pill"/>
+  <text x="470" y="434" class="rel-label">memiliki</text>
+  <path d="M 440 1000 L 520 1000" class="rel-line"/>
+  <line x1="446" y1="992" x2="446" y2="1008" class="rel-line"/>
+  <line x1="452" y1="992" x2="452" y2="1008" class="rel-line"/>
+  <circle cx="506" cy="1000" r="4.5" class="symbol"/>
+  <path d="M 508 992 L 520 1000 L 508 1008" class="crow"/>
+  <rect x="441" y="971" width="78" height="22" class="pill"/>
+  <text x="480" y="986" class="rel-label">menghasilkan</text>
+  <path d="M 230 1048 L 230 1118" class="rel-line"/>
+  <line x1="222" y1="1054" x2="238" y2="1054" class="rel-line"/>
+  <line x1="222" y1="1060" x2="238" y2="1060" class="rel-line"/>
+  <circle cx="230" cy="1104" r="4.5" class="symbol"/>
+  <path d="M 222 1118 L 230 1109 L 238 1118" class="crow"/>
+  <rect x="201" y="1075" width="58" height="22" class="pill"/>
+  <text x="230" y="1090" class="rel-label">menerima</text>
+  <path d="M 440 700 L 520 700" class="rel-line"/>
+  <line x1="446" y1="692" x2="446" y2="708" class="rel-line"/>
+  <line x1="452" y1="692" x2="452" y2="708" class="rel-line"/>
+  <line x1="508" y1="692" x2="508" y2="708" class="rel-line"/>
+  <line x1="514" y1="692" x2="514" y2="708" class="rel-line"/>
+  <rect x="443" y="657" width="74" height="22" class="pill"/>
+  <text x="480" y="672" class="rel-label">diterbitkan</text>
+  <rect x="463" y="673" width="34" height="22" class="pill"/>
+  <text x="480" y="688" class="rel-label">pada</text>
+  <path d="M 440 480 L 480 480 L 480 560 L 700 560 L 700 622" class="rel-line"/>
+  <line x1="446" y1="472" x2="446" y2="488" class="rel-line"/>
+  <line x1="452" y1="472" x2="452" y2="488" class="rel-line"/>
+  <circle cx="700" cy="608" r="4.5" class="symbol"/>
+  <path d="M 692 622 L 700 613 L 708 622" class="crow"/>
+  <rect x="537" y="537" width="106" height="22" class="pill"/>
+  <text x="590" y="552" class="rel-label">mempublikasikan</text>
+
+  <!-- ================= ENTITAS ================= -->
+  <g transform="translate(20, 40)">
+    <rect width="420" height="126" class="body-box"/>
+    <rect width="420" height="30" class="header-box"/>
+    <text x="210" y="21" class="entity-title">KEMENTERIAN</text>
+    <line x1="104" y1="30" x2="104" y2="126" class="cell-border"/>
+    <line x1="322" y1="30" x2="322" y2="126" class="cell-border"/>
+    <line x1="0" y1="60" x2="420" y2="60" class="cell-border"/>
+    <line x1="0" y1="90" x2="420" y2="90" class="cell-border"/>
+    <text x="10" y="51" class="t-type">INT</text>
+    <text x="112" y="51" class="t-name">id_kementerian</text>
+    <text x="310" y="51" class="t-pk">PK</text>
+    <text x="10" y="81" class="t-type">VARCHAR</text>
+    <text x="112" y="81" class="t-name">nama_kementerian</text>
+    <text x="10" y="111" class="t-type">VARCHAR</text>
+    <text x="112" y="111" class="t-name">kode_kementerian</text>
+  </g>
+  <g transform="translate(20, 236)">
+    <rect width="420" height="276" class="body-box"/>
+    <rect width="420" height="30" class="header-box"/>
+    <text x="210" y="21" class="entity-title">PENGGUNA</text>
+    <line x1="104" y1="30" x2="104" y2="276" class="cell-border"/>
+    <line x1="322" y1="30" x2="322" y2="276" class="cell-border"/>
+    <line x1="0" y1="60" x2="420" y2="60" class="cell-border"/>
+    <line x1="0" y1="90" x2="420" y2="90" class="cell-border"/>
+    <line x1="0" y1="120" x2="420" y2="120" class="cell-border"/>
+    <line x1="0" y1="150" x2="420" y2="150" class="cell-border"/>
+    <line x1="0" y1="180" x2="420" y2="180" class="cell-border"/>
+    <line x1="0" y1="210" x2="420" y2="210" class="cell-border"/>
+    <line x1="0" y1="240" x2="420" y2="240" class="cell-border"/>
+    <text x="10" y="51" class="t-type">INT</text>
+    <text x="112" y="51" class="t-name">id_pengguna</text>
+    <text x="310" y="51" class="t-pk">PK</text>
+    <text x="10" y="81" class="t-type">INT</text>
+    <text x="112" y="81" class="t-name">id_kementerian</text>
+    <text x="310" y="81" class="t-fk">FK</text>
+    <text x="330" y="81" class="t-desc">(null) staf</text>
+    <text x="10" y="111" class="t-type">VARCHAR</text>
+    <text x="112" y="111" class="t-name">nama_lengkap</text>
+    <text x="10" y="141" class="t-type">VARCHAR</text>
+    <text x="112" y="141" class="t-name">email</text>
+    <text x="10" y="171" class="t-type">VARCHAR</text>
+    <text x="112" y="171" class="t-name">password_hash</text>
+    <text x="10" y="201" class="t-type">VARCHAR</text>
+    <text x="112" y="201" class="t-name">role</text>
+    <text x="330" y="201" class="t-desc">3 peran</text>
+    <text x="10" y="231" class="t-type">VARCHAR</text>
+    <text x="112" y="231" class="t-name">spesialisasi</text>
+    <text x="330" y="231" class="t-desc">(null)</text>
+    <text x="10" y="261" class="t-type">VARCHAR</text>
+    <text x="112" y="261" class="t-name">no_whatsapp</text>
+  </g>
+  <g transform="translate(20, 622)">
+    <rect width="420" height="426" class="body-box"/>
+    <rect width="420" height="30" class="header-box"/>
+    <text x="210" y="21" class="entity-title">TIKET_PESANAN</text>
+    <line x1="104" y1="30" x2="104" y2="426" class="cell-border"/>
+    <line x1="322" y1="30" x2="322" y2="426" class="cell-border"/>
+    <line x1="0" y1="60" x2="420" y2="60" class="cell-border"/>
+    <line x1="0" y1="90" x2="420" y2="90" class="cell-border"/>
+    <line x1="0" y1="120" x2="420" y2="120" class="cell-border"/>
+    <line x1="0" y1="150" x2="420" y2="150" class="cell-border"/>
+    <line x1="0" y1="180" x2="420" y2="180" class="cell-border"/>
+    <line x1="0" y1="210" x2="420" y2="210" class="cell-border"/>
+    <line x1="0" y1="240" x2="420" y2="240" class="cell-border"/>
+    <line x1="0" y1="270" x2="420" y2="270" class="cell-border"/>
+    <line x1="0" y1="300" x2="420" y2="300" class="cell-border"/>
+    <line x1="0" y1="330" x2="420" y2="330" class="cell-border"/>
+    <line x1="0" y1="360" x2="420" y2="360" class="cell-border"/>
+    <line x1="0" y1="390" x2="420" y2="390" class="cell-border"/>
+    <text x="10" y="51" class="t-type">VARCHAR</text>
+    <text x="112" y="51" class="t-name">id_tiket</text>
+    <text x="310" y="51" class="t-pk">PK</text>
+    <text x="330" y="51" class="t-desc">#MED-YYMM</text>
+    <text x="10" y="81" class="t-type">INT</text>
+    <text x="112" y="81" class="t-name">id_pemohon</text>
+    <text x="310" y="81" class="t-fk">FK</text>
+    <text x="330" y="81" class="t-desc">Akun Klien</text>
+    <text x="10" y="111" class="t-type">INT</text>
+    <text x="112" y="111" class="t-name">id_eksekutor</text>
+    <text x="310" y="111" class="t-fk">FK</text>
+    <text x="330" y="111" class="t-desc">(null)</text>
+    <text x="10" y="141" class="t-type">VARCHAR</text>
+    <text x="112" y="141" class="t-name">judul_publikasi</text>
+    <text x="10" y="171" class="t-type">VARCHAR</text>
+    <text x="112" y="171" class="t-name">kanal_tujuan</text>
+    <text x="330" y="171" class="t-desc">Feeds/TikTok</text>
+    <text x="10" y="201" class="t-type">DATE</text>
+    <text x="112" y="201" class="t-name">tanggal_target_tayang</text>
+    <text x="10" y="231" class="t-type">DATETIME</text>
+    <text x="112" y="231" class="t-name">tanggal_pengajuan</text>
+    <text x="10" y="261" class="t-type">DATETIME</text>
+    <text x="112" y="261" class="t-name">waktu_penugasan</text>
+    <text x="330" y="261" class="t-desc">(null)</text>
+    <text x="10" y="291" class="t-type">TEXT</text>
+    <text x="112" y="291" class="t-name">deskripsi_brief</text>
+    <text x="10" y="321" class="t-type">VARCHAR</text>
+    <text x="112" y="321" class="t-name">status_tiket</text>
+    <text x="330" y="321" class="t-desc">Submitted dst</text>
+    <text x="10" y="351" class="t-type">BOOLEAN</text>
+    <text x="112" y="351" class="t-name">is_rush_order</text>
+    <text x="330" y="351" class="t-desc">BR-01</text>
+    <text x="10" y="381" class="t-type">TEXT</text>
+    <text x="112" y="381" class="t-name">alasan_darurat</text>
+    <text x="330" y="381" class="t-desc">(null)</text>
+    <text x="10" y="411" class="t-type">TEXT</text>
+    <text x="112" y="411" class="t-name">catatan_penolakan</text>
+    <text x="330" y="411" class="t-desc">(null)</text>
+  </g>
+  <g transform="translate(520, 236)">
+    <rect width="420" height="276" class="body-box"/>
+    <rect width="420" height="30" class="header-box"/>
+    <text x="210" y="21" class="entity-title">BERKAS_ASET</text>
+    <line x1="104" y1="30" x2="104" y2="276" class="cell-border"/>
+    <line x1="322" y1="30" x2="322" y2="276" class="cell-border"/>
+    <line x1="0" y1="60" x2="420" y2="60" class="cell-border"/>
+    <line x1="0" y1="90" x2="420" y2="90" class="cell-border"/>
+    <line x1="0" y1="120" x2="420" y2="120" class="cell-border"/>
+    <line x1="0" y1="150" x2="420" y2="150" class="cell-border"/>
+    <line x1="0" y1="180" x2="420" y2="180" class="cell-border"/>
+    <line x1="0" y1="210" x2="420" y2="210" class="cell-border"/>
+    <line x1="0" y1="240" x2="420" y2="240" class="cell-border"/>
+    <text x="10" y="51" class="t-type">INT</text>
+    <text x="112" y="51" class="t-name">id_aset</text>
+    <text x="310" y="51" class="t-pk">PK</text>
+    <text x="10" y="81" class="t-type">VARCHAR</text>
+    <text x="112" y="81" class="t-name">id_tiket</text>
+    <text x="310" y="81" class="t-fk">FK</text>
+    <text x="10" y="111" class="t-type">VARCHAR</text>
+    <text x="112" y="111" class="t-name">nama_file</text>
+    <text x="10" y="141" class="t-type">VARCHAR</text>
+    <text x="112" y="141" class="t-name">file_path</text>
+    <text x="10" y="171" class="t-type">INT</text>
+    <text x="112" y="171" class="t-name">ukuran_mb</text>
+    <text x="330" y="171" class="t-desc">maks 50MB</text>
+    <text x="10" y="201" class="t-type">VARCHAR</text>
+    <text x="112" y="201" class="t-name">format_file</text>
+    <text x="330" y="201" class="t-desc">PNG/JPG/PDF</text>
+    <text x="10" y="231" class="t-type">VARCHAR</text>
+    <text x="112" y="231" class="t-name">tautan_gdrive</text>
+    <text x="330" y="231" class="t-desc">(null)</text>
+    <text x="10" y="261" class="t-type">BOOLEAN</text>
+    <text x="112" y="261" class="t-name">status_purged</text>
+    <text x="330" y="261" class="t-desc">BR-05</text>
+  </g>
+  <g transform="translate(520, 938)">
+    <rect width="420" height="246" class="body-box"/>
+    <rect width="420" height="30" class="header-box"/>
+    <text x="210" y="21" class="entity-title">DRAF_KARYA</text>
+    <line x1="104" y1="30" x2="104" y2="246" class="cell-border"/>
+    <line x1="322" y1="30" x2="322" y2="246" class="cell-border"/>
+    <line x1="0" y1="60" x2="420" y2="60" class="cell-border"/>
+    <line x1="0" y1="90" x2="420" y2="90" class="cell-border"/>
+    <line x1="0" y1="120" x2="420" y2="120" class="cell-border"/>
+    <line x1="0" y1="150" x2="420" y2="150" class="cell-border"/>
+    <line x1="0" y1="180" x2="420" y2="180" class="cell-border"/>
+    <line x1="0" y1="210" x2="420" y2="210" class="cell-border"/>
+    <text x="10" y="51" class="t-type">INT</text>
+    <text x="112" y="51" class="t-name">id_draf</text>
+    <text x="310" y="51" class="t-pk">PK</text>
+    <text x="10" y="81" class="t-type">VARCHAR</text>
+    <text x="112" y="81" class="t-name">id_tiket</text>
+    <text x="310" y="81" class="t-fk">FK</text>
+    <text x="10" y="111" class="t-type">VARCHAR</text>
+    <text x="112" y="111" class="t-name">versi_draf</text>
+    <text x="330" y="111" class="t-desc">v1, v2</text>
+    <text x="10" y="141" class="t-type">VARCHAR</text>
+    <text x="112" y="141" class="t-name">file_path_preview</text>
+    <text x="10" y="171" class="t-type">VARCHAR</text>
+    <text x="112" y="171" class="t-name">tautan_preview_video</text>
+    <text x="330" y="171" class="t-desc">(null)</text>
+    <text x="10" y="201" class="t-type">TEXT</text>
+    <text x="112" y="201" class="t-name">catatan_draf</text>
+    <text x="10" y="231" class="t-type">DATETIME</text>
+    <text x="112" y="231" class="t-name">tanggal_unggah</text>
+  </g>
+  <g transform="translate(20, 1118)">
+    <rect width="420" height="186" class="body-box"/>
+    <rect width="420" height="30" class="header-box"/>
+    <text x="210" y="21" class="entity-title">RIWAYAT_REVISI</text>
+    <line x1="104" y1="30" x2="104" y2="186" class="cell-border"/>
+    <line x1="322" y1="30" x2="322" y2="186" class="cell-border"/>
+    <line x1="0" y1="60" x2="420" y2="60" class="cell-border"/>
+    <line x1="0" y1="90" x2="420" y2="90" class="cell-border"/>
+    <line x1="0" y1="120" x2="420" y2="120" class="cell-border"/>
+    <line x1="0" y1="150" x2="420" y2="150" class="cell-border"/>
+    <text x="10" y="51" class="t-type">INT</text>
+    <text x="112" y="51" class="t-name">id_revisi</text>
+    <text x="310" y="51" class="t-pk">PK</text>
+    <text x="10" y="81" class="t-type">VARCHAR</text>
+    <text x="112" y="81" class="t-name">id_tiket</text>
+    <text x="310" y="81" class="t-fk">FK</text>
+    <text x="10" y="111" class="t-type">INT</text>
+    <text x="112" y="111" class="t-name">revisi_ke</text>
+    <text x="330" y="111" class="t-desc">1-2 (BR-02)</text>
+    <text x="10" y="141" class="t-type">TEXT</text>
+    <text x="112" y="141" class="t-name">poin_revisi</text>
+    <text x="10" y="171" class="t-type">DATETIME</text>
+    <text x="112" y="171" class="t-name">tanggal_pengajuan_revisi</text>
+  </g>
+  <g transform="translate(520, 622)">
+    <rect width="420" height="186" class="body-box"/>
+    <rect width="420" height="30" class="header-box"/>
+    <text x="210" y="21" class="entity-title">PUBLIKASI_KONTEN</text>
+    <line x1="104" y1="30" x2="104" y2="186" class="cell-border"/>
+    <line x1="322" y1="30" x2="322" y2="186" class="cell-border"/>
+    <line x1="0" y1="60" x2="420" y2="60" class="cell-border"/>
+    <line x1="0" y1="90" x2="420" y2="90" class="cell-border"/>
+    <line x1="0" y1="120" x2="420" y2="120" class="cell-border"/>
+    <line x1="0" y1="150" x2="420" y2="150" class="cell-border"/>
+    <text x="10" y="51" class="t-type">INT</text>
+    <text x="112" y="51" class="t-name">id_publikasi</text>
+    <text x="310" y="51" class="t-pk">PK</text>
+    <text x="10" y="81" class="t-type">VARCHAR</text>
+    <text x="112" y="81" class="t-name">id_tiket</text>
+    <text x="310" y="81" class="t-fk">FK</text>
+    <text x="10" y="111" class="t-type">VARCHAR</text>
+    <text x="112" y="111" class="t-name">url_postingan_medsos</text>
+    <text x="330" y="111" class="t-desc">FR-15</text>
+    <text x="10" y="141" class="t-type">DATETIME</text>
+    <text x="112" y="141" class="t-name">tanggal_terbit</text>
+    <text x="10" y="171" class="t-type">INT</text>
+    <text x="112" y="171" class="t-name">id_staf_medsos</text>
+    <text x="310" y="171" class="t-fk">FK</text>
+    <text x="330" y="171" class="t-desc">Staf Publikasi</text>
+  </g>
+
+</svg>

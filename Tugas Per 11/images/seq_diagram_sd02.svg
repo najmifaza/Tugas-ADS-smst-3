@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1166" width="1024" height="1166">
+  <defs>
+    <style>
+
+      .title { font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .head { fill: #D9D9D9; stroke: #000000; stroke-width: 1.5; }
+      .head-name { font-family: 'Times New Roman', serif; font-size: 15px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .head-type { font-family: 'Times New Roman', serif; font-size: 11px; font-style: italic; fill: #333333; text-anchor: middle; }
+      .cell-border { stroke: #C9CDD2; stroke-width: 0.9; }
+      .lifeline { stroke: #000000; stroke-width: 1.1; stroke-dasharray: 6 5; }
+      .activation { fill: #FFFFFF; stroke: #000000; stroke-width: 1.2; }
+      .msg-call { stroke: #000000; stroke-width: 1.6; }
+      .msg-return { stroke: #000000; stroke-width: 1.3; stroke-dasharray: 7 5; }
+      .arrow { fill: #000000; stroke: none; }
+      .arrow-open { fill: #FFFFFF; stroke: #000000; stroke-width: 1.2; }
+      .msg-bg { fill: #FFFFFF; }
+      .msg-text { font-family: 'Times New Roman', serif; font-size: 14px; fill: #000000; text-anchor: middle; }
+      .frag-alt { fill: none; stroke: #000000; stroke-width: 1.3; }
+      .frag-opt { fill: none; stroke: #000000; stroke-width: 1.3; stroke-dasharray: 4 3; }
+      .frag-tab { fill: #FFFFFF; stroke: #000000; stroke-width: 1.3; }
+      .frag-else { stroke: #000000; stroke-width: 1.2; stroke-dasharray: 4 3; }
+      .frag-tag { font-family: 'Times New Roman', serif; font-size: 13px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .frag-cond { font-family: 'Times New Roman', serif; font-size: 13px; font-style: italic; fill: #000000; }
+
+    </style>
+  </defs>
+  <rect width="1024" height="1166" fill="#FFFFFF"/>
+  <line x1="77" y1="60" x2="77" y2="1136" class="lifeline"/>
+  <line x1="222" y1="60" x2="222" y2="1136" class="lifeline"/>
+  <line x1="367" y1="60" x2="367" y2="1136" class="lifeline"/>
+  <line x1="512" y1="60" x2="512" y2="1136" class="lifeline"/>
+  <line x1="657" y1="60" x2="657" y2="1136" class="lifeline"/>
+  <line x1="802" y1="60" x2="802" y2="1136" class="lifeline"/>
+  <line x1="947" y1="60" x2="947" y2="1136" class="lifeline"/>
+  <rect x="505" y="140" width="14" height="30" class="activation"/>
+  <rect x="360" y="110" width="14" height="90" class="activation"/>
+  <rect x="940" y="290" width="14" height="30" class="activation"/>
+  <rect x="650" y="590" width="14" height="30" class="activation"/>
+  <rect x="650" y="650" width="14" height="30" class="activation"/>
+  <rect x="37" y="700" width="950" height="80" class="frag-opt"/>
+  <rect x="37" y="700" width="52" height="20" class="frag-tab"/>
+  <text x="63" y="715" class="frag-tag">opt</text>
+  <text x="99" y="715" class="frag-cond">[jumlah_tiket_aktif >= 3 (BR-04)]</text>
+  <rect x="37" y="340" width="950" height="566" class="frag-alt"/>
+  <rect x="37" y="340" width="52" height="20" class="frag-tab"/>
+  <text x="63" y="355" class="frag-tag">alt</text>
+  <text x="99" y="355" class="frag-cond">[brief tidak memenuhi standar]</text>
+  <rect x="37" y="896" width="950" height="170" class="frag-opt"/>
+  <rect x="37" y="896" width="52" height="20" class="frag-tab"/>
+  <text x="63" y="911" class="frag-tag">opt</text>
+  <text x="99" y="911" class="frag-cond">[mutasi tugas karena overload atau eksekutor berhalangan (FR-09)]</text>
+  <line x1="37" y1="480" x2="987" y2="480" class="frag-else"/>
+  <text x="49" y="474" class="frag-cond">[else brief layak]</text>
+  <line x1="77" y1="80" x2="222" y2="80" class="msg-call"/>
+  <path d="M 222 80 L 213 76 L 213 84 Z" class="arrow"/>
+  <rect x="35" y="60" width="229" height="16" class="msg-bg"/>
+  <text x="149" y="72" class="msg-text">bukaAntreanTiket(filter_status)</text>
+  <line x1="222" y1="110" x2="367" y2="110" class="msg-call"/>
+  <path d="M 367 110 L 358 106 L 358 114 Z" class="arrow"/>
+  <rect x="180" y="90" width="229" height="16" class="msg-bg"/>
+  <text x="294" y="102" class="msg-text">daftarTiketMasuk(filter_status)</text>
+  <line x1="367" y1="140" x2="512" y2="140" class="msg-call"/>
+  <path d="M 512 140 L 503 136 L 503 144 Z" class="arrow"/>
+  <rect x="248" y="120" width="383" height="16" class="msg-bg"/>
+  <text x="439" y="132" class="msg-text">cariTiket(status_tiket, id_kementerian, kanal_tujuan)</text>
+  <line x1="512" y1="170" x2="367" y2="170" class="msg-return"/>
+  <path d="M 367 170 L 376 166 L 376 174 Z" class="arrow-open"/>
+  <rect x="391" y="150" width="96" height="16" class="msg-bg"/>
+  <text x="439" y="162" class="msg-text">daftar_tiket</text>
+  <line x1="367" y1="200" x2="222" y2="200" class="msg-return"/>
+  <path d="M 222 200 L 231 196 L 231 204 Z" class="arrow-open"/>
+  <rect x="194" y="180" width="201" height="16" class="msg-bg"/>
+  <text x="294" y="192" class="msg-text">renderAntrean(daftar_tiket)</text>
+  <line x1="77" y1="230" x2="222" y2="230" class="msg-call"/>
+  <path d="M 222 230 L 213 226 L 213 234 Z" class="arrow"/>
+  <rect x="66" y="210" width="166" height="16" class="msg-bg"/>
+  <text x="149" y="222" class="msg-text">periksaBrief(id_tiket)</text>
+  <line x1="222" y1="260" x2="367" y2="260" class="msg-call"/>
+  <path d="M 367 260 L 358 256 L 358 264 Z" class="arrow"/>
+  <rect x="201" y="240" width="187" height="16" class="msg-bg"/>
+  <text x="294" y="252" class="msg-text">muatDetailTiket(id_tiket)</text>
+  <line x1="367" y1="290" x2="947" y2="290" class="msg-call"/>
+  <path d="M 947 290 L 938 286 L 938 294 Z" class="arrow"/>
+  <rect x="581" y="270" width="152" height="16" class="msg-bg"/>
+  <text x="657" y="282" class="msg-text">fileBerkas(id_tiket)</text>
+  <line x1="947" y1="320" x2="367" y2="320" class="msg-return"/>
+  <path d="M 367 320 L 376 316 L 376 324 Z" class="arrow-open"/>
+  <rect x="613" y="300" width="89" height="16" class="msg-bg"/>
+  <text x="657" y="312" class="msg-text">daftar_aset</text>
+  <line x1="77" y1="384" x2="222" y2="384" class="msg-call"/>
+  <path d="M 222 384 L 213 380 L 213 388 Z" class="arrow"/>
+  <rect x="42" y="364" width="215" height="16" class="msg-bg"/>
+  <text x="149" y="376" class="msg-text">tolakBrief(catatan_penolakan)</text>
+  <line x1="222" y1="414" x2="367" y2="414" class="msg-call"/>
+  <path d="M 367 414 L 358 410 L 358 418 Z" class="arrow"/>
+  <rect x="134" y="394" width="320" height="16" class="msg-bg"/>
+  <text x="294" y="406" class="msg-text">simpanPenolakan(id_tiket, catatan_penolakan)</text>
+  <line x1="367" y1="444" x2="512" y2="444" class="msg-call"/>
+  <path d="M 512 444 L 503 440 L 503 448 Z" class="arrow"/>
+  <rect x="332" y="424" width="215" height="16" class="msg-bg"/>
+  <text x="439" y="436" class="msg-text">tolakBrief(catatan_penolakan)</text>
+  <line x1="367" y1="500" x2="512" y2="500" class="msg-call"/>
+  <path d="M 512 500 L 503 496 L 503 504 Z" class="arrow"/>
+  <rect x="255" y="480" width="369" height="16" class="msg-bg"/>
+  <text x="439" y="492" class="msg-text">setujuiBrief(id_pengguna_admin, tanggal_verifikasi)</text>
+  <line x1="77" y1="530" x2="222" y2="530" class="msg-call"/>
+  <path d="M 222 530 L 213 526 L 213 534 Z" class="arrow"/>
+  <rect x="87" y="510" width="124" height="16" class="msg-bg"/>
+  <text x="149" y="522" class="msg-text">bukaDaftarStaf()</text>
+  <line x1="222" y1="560" x2="367" y2="560" class="msg-call"/>
+  <path d="M 367 560 L 358 556 L 358 564 Z" class="arrow"/>
+  <rect x="232" y="540" width="124" height="16" class="msg-bg"/>
+  <text x="294" y="552" class="msg-text">muatDaftarStaf()</text>
+  <line x1="367" y1="590" x2="657" y2="590" class="msg-call"/>
+  <path d="M 657 590 L 648 586 L 648 594 Z" class="arrow"/>
+  <rect x="405" y="570" width="215" height="16" class="msg-bg"/>
+  <text x="512" y="582" class="msg-text">daftarEksekutor(spesialisasi)</text>
+  <line x1="657" y1="620" x2="367" y2="620" class="msg-return"/>
+  <path d="M 367 620 L 376 616 L 376 624 Z" class="arrow-open"/>
+  <rect x="450" y="600" width="124" height="16" class="msg-bg"/>
+  <text x="512" y="612" class="msg-text">daftar_eksekutor</text>
+  <line x1="367" y1="650" x2="657" y2="650" class="msg-call"/>
+  <path d="M 657 650 L 648 646 L 648 654 Z" class="arrow"/>
+  <rect x="401" y="630" width="222" height="16" class="msg-bg"/>
+  <text x="512" y="642" class="msg-text">hitungTiketAktif(id_eksekutor)</text>
+  <line x1="657" y1="680" x2="367" y2="680" class="msg-return"/>
+  <path d="M 367 680 L 376 676 L 376 684 Z" class="arrow-open"/>
+  <rect x="443" y="660" width="138" height="16" class="msg-bg"/>
+  <text x="512" y="672" class="msg-text">jumlah_tiket_aktif</text>
+  <line x1="367" y1="744" x2="222" y2="744" class="msg-return"/>
+  <path d="M 222 744 L 231 740 L 231 748 Z" class="arrow-open"/>
+  <rect x="54" y="724" width="481" height="16" class="msg-bg"/>
+  <text x="294" y="736" class="msg-text">tampilkanPeringatan(&quot;Staf memegang 3 tugas aktif (Workload Limit)&quot;)</text>
+  <line x1="77" y1="780" x2="222" y2="780" class="msg-call"/>
+  <path d="M 222 780 L 213 776 L 213 784 Z" class="arrow"/>
+  <rect x="28" y="760" width="243" height="16" class="msg-bg"/>
+  <text x="149" y="772" class="msg-text">konfirmasiPenugasan(id_eksekutor)</text>
+  <line x1="222" y1="810" x2="367" y2="810" class="msg-call"/>
+  <path d="M 367 810 L 358 806 L 358 814 Z" class="arrow"/>
+  <rect x="159" y="790" width="271" height="16" class="msg-bg"/>
+  <text x="294" y="802" class="msg-text">tugaskanTiket(id_tiket, id_eksekutor)</text>
+  <line x1="367" y1="840" x2="512" y2="840" class="msg-call"/>
+  <path d="M 512 840 L 503 836 L 503 844 Z" class="arrow"/>
+  <rect x="297" y="820" width="285" height="16" class="msg-bg"/>
+  <text x="439" y="832" class="msg-text">tugaskan(id_eksekutor, waktu_penugasan)</text>
+  <line x1="367" y1="870" x2="802" y2="870" class="msg-call"/>
+  <path d="M 802 870 L 793 866 L 793 874 Z" class="arrow"/>
+  <rect x="291" y="850" width="586" height="16" class="msg-bg"/>
+  <text x="584" y="862" class="msg-text">catatPenugasan(id_tiket, id_eksekutor, jenis_penugasan=&quot;awal&quot;, alasan_mutasi=NULL)</text>
+  <line x1="77" y1="940" x2="222" y2="940" class="msg-call"/>
+  <path d="M 222 940 L 213 936 L 213 944 Z" class="arrow"/>
+  <rect x="6" y="920" width="404" height="16" class="msg-bg"/>
+  <text x="208" y="932" class="msg-text">alihkanTugas(id_tiket, id_eksekutor_baru, alasan_mutasi)</text>
+  <line x1="222" y1="970" x2="367" y2="970" class="msg-call"/>
+  <path d="M 367 970 L 358 966 L 358 974 Z" class="arrow"/>
+  <rect x="89" y="950" width="411" height="16" class="msg-bg"/>
+  <text x="294" y="962" class="msg-text">reAssignTiket(id_tiket, id_eksekutor_baru, alasan_mutasi)</text>
+  <line x1="367" y1="1000" x2="512" y2="1000" class="msg-call"/>
+  <path d="M 512 1000 L 503 996 L 503 1004 Z" class="arrow"/>
+  <rect x="279" y="980" width="320" height="16" class="msg-bg"/>
+  <text x="439" y="992" class="msg-text">tugaskan(id_eksekutor_baru, waktu_penugasan)</text>
+  <line x1="367" y1="1030" x2="802" y2="1030" class="msg-call"/>
+  <path d="M 802 1030 L 793 1026 L 793 1034 Z" class="arrow"/>
+  <rect x="284" y="1010" width="600" height="16" class="msg-bg"/>
+  <text x="584" y="1022" class="msg-text">catatPenugasan(id_tiket, id_eksekutor_baru, jenis_penugasan=&quot;mutasi&quot;, alasan_mutasi)</text>
+  <line x1="367" y1="1066" x2="222" y2="1066" class="msg-return"/>
+  <path d="M 222 1066 L 231 1062 L 231 1070 Z" class="arrow-open"/>
+  <rect x="183" y="1046" width="222" height="16" class="msg-bg"/>
+  <text x="294" y="1058" class="msg-text">konfirmasiStatus(status_tiket)</text>
+  <line x1="222" y1="1096" x2="77" y2="1096" class="msg-return"/>
+  <path d="M 77 1096 L 86 1092 L 86 1100 Z" class="arrow-open"/>
+  <rect x="6" y="1076" width="320" height="16" class="msg-bg"/>
+  <text x="166" y="1088" class="msg-text">tampilkanStatusTiket(id_tiket, status_tiket)</text>
+  <rect x="8" y="16" width="139" height="44" class="head"/>
+  <text x="77" y="33" class="head-name">AD</text>
+  <line x1="8" y1="44" x2="146" y2="44" class="cell-border"/>
+  <text x="77" y="55" class="head-type">lifeline</text>
+  <rect x="153" y="16" width="139" height="44" class="head"/>
+  <text x="222" y="33" class="head-name">UI</text>
+  <line x1="153" y1="44" x2="291" y2="44" class="cell-border"/>
+  <text x="222" y="55" class="head-type">lifeline</text>
+  <rect x="298" y="16" width="139" height="44" class="head"/>
+  <text x="367" y="33" class="head-name">C</text>
+  <line x1="298" y1="44" x2="436" y2="44" class="cell-border"/>
+  <text x="367" y="55" class="head-type">lifeline</text>
+  <rect x="443" y="16" width="139" height="44" class="head"/>
+  <text x="512" y="33" class="head-name">T</text>
+  <line x1="443" y1="44" x2="581" y2="44" class="cell-border"/>
+  <text x="512" y="55" class="head-type">lifeline</text>
+  <rect x="588" y="16" width="139" height="44" class="head"/>
+  <text x="657" y="33" class="head-name">U</text>
+  <line x1="588" y1="44" x2="726" y2="44" class="cell-border"/>
+  <text x="657" y="55" class="head-type">lifeline</text>
+  <rect x="733" y="16" width="139" height="44" class="head"/>
+  <text x="802" y="33" class="head-name">P</text>
+  <line x1="733" y1="44" x2="871" y2="44" class="cell-border"/>
+  <text x="802" y="55" class="head-type">lifeline</text>
+  <rect x="878" y="16" width="139" height="44" class="head"/>
+  <text x="947" y="33" class="head-name">A</text>
+  <line x1="878" y1="44" x2="1016" y2="44" class="cell-border"/>
+  <text x="947" y="55" class="head-type">lifeline</text>
+</svg>

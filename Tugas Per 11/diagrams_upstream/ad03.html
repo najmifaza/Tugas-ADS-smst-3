@@ -1,0 +1,104 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0;padding:0;background:#fff;}svg{display:block;}</style></head><body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" width="980" height="620">
+  <defs>
+    <style>
+.pool { fill: #FFFFFF; stroke: #000000; stroke-width: 1.4; }
+      .lane-head { fill: #E8E8E8; stroke: #000000; stroke-width: 1.4; }
+      .lane-name { font-family: 'Times New Roman', serif; font-size: 14px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .bpmn-task { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .act-node { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .gw { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .gw-text { font-family: 'Times New Roman', serif; font-size: 14px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .ev-start { fill: #FFFFFF; stroke: #000000; stroke-width: 1.8; }
+      .ev-end { fill: #FFFFFF; stroke: #000000; stroke-width: 2.6; }
+      .ev-inner { fill: #000000; stroke: none; }
+      .store { fill: #FBFBFB; stroke: #000000; stroke-width: 1.5; }
+      .store-title { font-family: 'Times New Roman', serif; font-size: 14px; font-weight: bold; fill: #000000; }
+      .store-text { font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; fill: #000000; }
+      .task-text { font-family: 'Times New Roman', serif; font-size: 14px; fill: #000000; text-anchor: middle; }
+      .actor { fill: #FFFFFF; stroke: #000000; stroke-width: 1.6; }
+      .actor-name { font-family: 'Times New Roman', serif; font-size: 15px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .uc { fill: #FFFFFF; stroke: #000000; stroke-width: 1.5; }
+      .boundary { fill: #FCFCFC; stroke: #000000; stroke-width: 1.6; }
+      .boundary-name { font-family: 'Times New Roman', serif; font-size: 15px; font-weight: bold; fill: #000000; text-anchor: middle; }
+      .flow { fill: none; stroke: #000000; stroke-width: 1.6; }
+      .flow-dashed { fill: none; stroke: #000000; stroke-width: 1.4; stroke-dasharray: 7 5; }
+      .arrow { fill: #000000; stroke: none; }
+      .arrow-open { fill: #FFFFFF; stroke: #000000; stroke-width: 1.2; }
+      .label-bg { fill: #FFFFFF; }
+      .flow-label { font-family: 'Times New Roman', serif; font-size: 13px; font-style: italic; fill: #000000; text-anchor: middle; }
+      .note { fill: #FFFFFF; stroke: #000000; stroke-width: 1.1; }
+      .note-text { font-family: 'Times New Roman', serif; font-size: 12px; fill: #000000; }
+    </style>
+  </defs>
+  <rect width="980" height="620" fill="#FFFFFF"/>
+  <rect x="20" y="30" width="930" height="150" class="pool"/>
+  <rect x="20" y="30" width="185" height="150" class="lane-head"/>
+  <text x="112.5" y="110.0" class="lane-name">Eksekutor</text>
+  <rect x="20" y="180" width="930" height="150" class="pool"/>
+  <rect x="20" y="180" width="185" height="150" class="lane-head"/>
+  <text x="112.5" y="260.0" class="lane-name">Controller</text>
+  <rect x="20" y="330" width="930" height="150" class="pool"/>
+  <rect x="20" y="330" width="185" height="150" class="lane-head"/>
+  <text x="112.5" y="410.0" class="lane-name">DRAF_KARYA</text>
+  <circle cx="221" cy="105" r="18" class="ev-start"/>
+  <rect x="250" y="76" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="337.5" y="102.5" class="task-text">Buka &quot;Tugas Saya&quot;,</text>
+  <text x="337.5" y="117.5" class="task-text">unduh aset</text>
+  <rect x="440" y="76" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="527.5" y="102.5" class="task-text">Mulai pengerjaan</text>
+  <text x="527.5" y="117.5" class="task-text">(status In Progress)</text>
+  <rect x="250" y="226" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="337.5" y="252.5" class="task-text">Unggah draf</text>
+  <text x="337.5" y="267.5" class="task-text">(gambar / tautan)</text>
+  <path d="M 512.0 216 L 554 258.0 L 512.0 300 L 470 258.0 Z" class="gw"/>
+  <text x="512.0" y="263.0" class="gw-text">valid?</text>
+  <rect x="650" y="226" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="737.5" y="252.5" class="task-text">Perbaiki tautan</text>
+  <text x="737.5" y="267.5" class="task-text">pratinjau</text>
+  <rect x="250" y="376" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="337.5" y="402.5" class="task-text">Tentukan versi</text>
+  <text x="337.5" y="417.5" class="task-text">draf (v1 / v2)</text>
+  <rect x="440" y="376" width="175" height="58" rx="10" class="bpmn-task"/>
+  <text x="527.5" y="402.5" class="task-text">Ubah status</text>
+  <text x="527.5" y="417.5" class="task-text">tiket</text>
+  <circle cx="898" cy="394" r="18" class="ev-end"/>
+  <circle cx="898" cy="394" r="12" class="ev-inner"/>
+  <path d="M 239 105 L 250 105" class="flow"/>
+  <path d="M 250 105 L 239 110 L 239 100 Z" class="arrow"/>
+  <path d="M 425 105 L 440 105" class="flow"/>
+  <path d="M 440 105 L 429 110 L 429 100 Z" class="arrow"/>
+  <rect x="333.0" y="42.0" width="199" height="17" class="label-bg"/>
+  <text x="432.5" y="55.0" class="flow-label">14 ubahStatus(&quot;In Progress&quot;)</text>
+  <path d="M 440 105 L 340 105 L 340 255 L 425 255" class="flow"/>
+  <path d="M 425 255 L 414 260 L 414 250 Z" class="arrow"/>
+  <rect x="268.5" y="191" width="111" height="17" class="label-bg"/>
+  <text x="324.0" y="204" class="flow-label">kerjakan konten</text>
+  <path d="M 425 255 L 470 255 L 470 258" class="flow"/>
+  <path d="M 470 258 L 465 247 L 475 247 Z" class="arrow"/>
+  <rect x="405.5" y="192.0" width="84" height="17" class="label-bg"/>
+  <text x="447.5" y="205.0" class="flow-label">unggah draf</text>
+  <path d="M 554 258 L 650 258 L 650 255" class="flow"/>
+  <path d="M 650 255 L 655 266 L 645 266 Z" class="arrow"/>
+  <rect x="580.5" y="233.0" width="43" height="17" class="label-bg"/>
+  <text x="602.0" y="246.0" class="flow-label">tidak</text>
+  <path d="M 738 284 L 738 308 L 338 308 L 338 284" class="flow-dashed"/>
+  <path d="M 338 284 L 342 295 L 332 295 Z" class="arrow-open"/>
+  <rect x="492.0" y="303.0" width="91" height="17" class="label-bg"/>
+  <text x="537.5" y="316.0" class="flow-label">unggah ulang</text>
+  <path d="M 470 258 L 340 258 L 340 405 L 425 405" class="flow"/>
+  <path d="M 425 405 L 414 410 L 414 400 Z" class="arrow"/>
+  <rect x="302.5" y="341" width="43" height="17" class="label-bg"/>
+  <text x="324.0" y="354" class="flow-label">valid</text>
+  <path d="M 425 405 L 440 405" class="flow"/>
+  <path d="M 440 405 L 429 410 L 429 400 Z" class="arrow"/>
+  <rect x="360.0" y="342.0" width="145" height="17" class="label-bg"/>
+  <text x="432.5" y="355.0" class="flow-label">17 versiBerikutnya()</text>
+  <path d="M 615 405 L 880 405 L 880 394" class="flow"/>
+  <path d="M 880 394 L 885 405 L 875 405 Z" class="arrow"/>
+  <rect x="672.0" y="380.0" width="151" height="17" class="label-bg"/>
+  <text x="747.5" y="393.0" class="flow-label">status Review (IC-12)</text>
+  <rect x="30" y="558" width="920" height="36" class="note"/>
+  <text x="42" y="578" class="note-text">Turunan dari narasi UC-03 (SRS §6.2) dan SD-03. Gate BR-04 (hanya tiket yang ditugaskan) dan IC-12 (versi unik).</text>
+</svg>
+</body></html>
